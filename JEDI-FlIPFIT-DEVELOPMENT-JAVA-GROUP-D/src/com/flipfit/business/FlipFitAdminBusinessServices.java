@@ -8,7 +8,7 @@ import java.util.*;
 /**
  * 
  */
-public class FlipFitAdminBusinessServices extends FlipFitUserBusinessServices{
+public class FlipFitAdminBusinessServices extends FlipFitUserBusinessServices implements FlipFitAdminBusinessInterface{
     public List<FlipFitGymOwner> getPendingGymOwnerList(){
         System.out.println("Here is the pending owner list");
         List<FlipFitGymOwner> pendingOwners = new ArrayList<>();

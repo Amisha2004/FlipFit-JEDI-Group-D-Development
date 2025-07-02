@@ -6,7 +6,7 @@ import com.flipfit.bean.FlipFitSlots;
 /**
  * 
  */
-public class FlipFitSlotsBusinessServices {
+public class FlipFitSlotsBusinessServices implements FlipFitSlotsBusinessInterface{
 	public boolean updateAvailability(FlipFitSlots flipFitSlots) {
         System.out.println("Updating Slot Availability");
         return true;

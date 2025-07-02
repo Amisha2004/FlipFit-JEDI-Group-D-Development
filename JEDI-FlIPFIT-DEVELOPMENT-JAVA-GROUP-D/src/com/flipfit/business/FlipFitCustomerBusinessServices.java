@@ -12,7 +12,7 @@ import com.flipfit.bean.FlipFitGymCentre;
 /**
  * 
  */
-public class FlipFitCustomerBusinessServices extends FlipFitUserBusinessServices {
+public class FlipFitCustomerBusinessServices extends FlipFitUserBusinessServices implements FlipFitCustomerBusinessInterface{
     public List<FlipFitGymCentre> viewGymCentres(){
         System.out.println("View centres: ");
 //        List<FlipFitGymCentre> gymCentres = new ArrayList();

@@ -6,19 +6,18 @@ package com.flipfit.business;
 //import java.util.ArrayList;
 import java.util.List;
 
-import com.flipfit.bean.FlipFitGymCentre;
+import com.flipfit.bean.*;
 
 /**
  * 
  */
-public class FlipFitUserBusinessServices {
+public class FlipFitUserBusinessServices implements FlipFitUserBusinessInterface{
    public boolean register(String userName,String password,String emailID,String phoneNumber,String role) {
 	   System.out.println("Registered successfully;");
 	   return true;
    }
-   public boolean logIn(String emailId,String password) {
+   public void logIn(FlipFitUser FlipFitUser) {
 	   System.out.println("Login successfully;");
-	   return true;
    }
    public boolean logOut() {
 	   System.out.println("LogOut successfully;");

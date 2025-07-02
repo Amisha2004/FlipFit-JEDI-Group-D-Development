@@ -9,7 +9,7 @@ import com.flipfit.bean.*;
 /**
  * 
  */
-public class FlipFitGymOwnerBusinessServices extends FlipFitUserBusinessServices{
+public class FlipFitGymOwnerBusinessServices extends FlipFitUserBusinessServices implements FlipFitGymOwnerBusinessInterface{
 	
 	public void addCentre(FlipFitGymCentre flipFitGymCentre){
         System.out.println("Added");

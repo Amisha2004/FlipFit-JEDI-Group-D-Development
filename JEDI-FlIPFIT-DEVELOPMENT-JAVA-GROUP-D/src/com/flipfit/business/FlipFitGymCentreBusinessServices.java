@@ -9,7 +9,7 @@ import com.flipfit.bean.*;
 /**
  * 
  */
-public class FlipFitGymCentreBusinessServices {
+public class FlipFitGymCentreBusinessServices implements FlipFitGymCentreBusinessInterface{
 	public FlipFitGymCentre updateGymCentre(FlipFitGymCentre flipFitGymCentre){
         System.out.println("Updating Gym Centre:> ");
         return flipFitGymCentre;
