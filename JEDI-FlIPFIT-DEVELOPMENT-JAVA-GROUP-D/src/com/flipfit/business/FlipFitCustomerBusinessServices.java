@@ -6,33 +6,33 @@ package com.flipfit.business;
 //import java.util.ArrayList;
 import java.util.List;
 
-import com.flipfit.bean.FlipFitBooking;
-import com.flipfit.bean.FlipFitGymCentre;
+import com.flipfit.bean.*;
+import com.flipfit.dao.FlipFitCustomerDAO;
 
 /**
  * 
  */
 public class FlipFitCustomerBusinessServices extends FlipFitUserBusinessServices implements FlipFitCustomerBusinessInterface{
+    private final FlipFitCustomerDAO flipFitCustomerDAO;
+    public FlipFitCustomerBusinessServices() {
+        this.flipFitCustomerDAO = new FlipFitCustomerDAO();
+    }
+
     public List<FlipFitGymCentre> viewGymCentres(){
-        System.out.println("View centres: ");
-//        List<FlipFitGymCentre> gymCentres = new ArrayList();
-        return null;
+        return this.flipFitCustomerDAO.viewGymCentres();
     }
     
     public List<FlipFitBooking> viewBookedSlots(int userId){
-        System.out.println("Booked Slots: ");
-//        List<FlipFitBooking> slotsBooked = new ArrayList();
-        return null;
-        
+        return this.flipFitCustomerDAO.viewBookedSlots(userId);
     }
     
-    public boolean checkBookingConflicts(int userId) {
+    public FlipFitBooking checkBookingConflicts(int userId) {
     	System.out.println("All Booking Conflicts checked!");
-    	return true;
+    	return this.flipFitCustomerDAO.checkBookingConflicts(userId);
     }
     public boolean makePayment(int userId) {
         System.out.println("Make payment called:> ");
-        return true;
+        return this.flipFitCustomerDAO.makePayment(userId);
     }
     
 }
