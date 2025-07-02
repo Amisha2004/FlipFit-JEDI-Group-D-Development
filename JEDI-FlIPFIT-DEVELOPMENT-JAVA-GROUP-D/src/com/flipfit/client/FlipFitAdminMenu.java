@@ -14,19 +14,19 @@ import java.util.List;
 public class FlipFitAdminMenu {
 
 	/**
-	 * @param args
+	 * @param admin
 	 */
 	public static void getFlipFitAdminMenu(FlipFitAdmin admin) {
 		// TODO Auto-generated method stub
 		System.out.println("You are in Admin menu.");
 		FlipFitAdminBusinessServices adminBusinessServices = new FlipFitAdminBusinessServices();
-		List<FlipFitGymOwner> pebdingGymOwners = adminBusinessServices.getPendingGymOwnerList();
-		if(pebdingGymOwners.isEmpty()) {
+		List<FlipFitGymOwner> pendingGymOwners = adminBusinessServices.getPendingGymOwnerList();
+		if(pendingGymOwners.isEmpty()) {
 			System.out.println("There are no pending gym owner to view this menu.");
 		}
 		else{
-			for(FlipFitGymOwner pebdingGymOwner : pebdingGymOwners){
-				System.out.println(pebdingGymOwner.getUserId() + " " + pebdingGymOwner.getUserName());
+			for(FlipFitGymOwner pendingGymOwner : pendingGymOwners){
+				System.out.println(pendingGymOwner.getUserId() + " " + pendingGymOwner.getUserName());
             }
 		}
 		List<FlipFitGymCentre> gymCentres = adminBusinessServices.getGymCentreUsingOwnerId(101);
