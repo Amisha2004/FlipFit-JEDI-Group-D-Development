@@ -6,8 +6,7 @@ package com.flipfit.business;
 //import java.util.ArrayList;
 import java.util.List;
 
-import com.flipfit.bean.FlipFitBooking;
-import com.flipfit.bean.FlipFitGymCentre;
+import com.flipfit.bean.*;
 import com.flipfit.dao.FlipFitCustomerDAO;
 
 /**
