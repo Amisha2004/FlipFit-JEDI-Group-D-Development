@@ -39,17 +39,18 @@ public class FlipFitMainApplicationMenu{
 			        switch (choice) {
 			            case 1: {
 			                System.out.println("Login");
-			                
 			                System.out.print("Enter your userName:> " );
 			                String username = in.next();
 			                System.out.print("Enter your password:> ");
 			                String password = in.next();
+
 			                System.out.print("""
                                     Enter your role:>
                                     0 -> Admin
                                     1 -> Customer
                                     2 -> GymOwner
                                     """);
+
 			                int role = in.nextInt();
 			                
 			                switch (role) {
