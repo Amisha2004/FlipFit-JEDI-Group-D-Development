@@ -16,7 +16,7 @@ import java.util.*;
 public class FlipFitMainApplicationMenu{
     
     /**
-     * @param args
+     * @param
      */
     public static void main(String[] args) {
         // TODO Auto-generated method stub
@@ -44,10 +44,12 @@ public class FlipFitMainApplicationMenu{
 			                String username = in.next();
 			                System.out.print("Enter your password:> ");
 			                String password = in.next();
-			                System.out.print("Enter your role:> "
-			                		+ "0 -> Admin"
-			                		+ "1 -> Customer"
-			                		+ "2 -> GymOwner ");
+			                System.out.print("""
+                                    Enter your role:>
+                                    0 -> Admin
+                                    1 -> Customer
+                                    2 -> GymOwner
+                                    """);
 			                int role = in.nextInt();
 			                
 			                switch (role) {
