@@ -128,12 +128,27 @@ public class FlipFitGymOwnerDAO {
         owner2.setGymsOwned(List.of(centre3.getGymID()));
     }
 
-    // --- End of Sample Data ---
+    public static void addCentre(FlipFitGymCentre flipFitGymCentre) {
 
+    }
 
-    public List<FlipFitGymCentre> viewCentresByOwnerID(FlipFitGymOwner owner) {
+    public static List<FlipFitCustomer> getCustomerList() {
+        System.out.println("Here is the customer list");
+        List<FlipFitCustomer> customers = new ArrayList<>();
+        for(FlipFitUser user: users){
+            if(user.getRole() == 3){
+                FlipFitCustomer customer = (FlipFitCustomer) user;
+                customers.add(customer);
+            }
+        }
+        return customers;
+    }
+
+    public static void addSlot(FlipFitSlots flipFitSlot) {
+    }
+
+    public static List<FlipFitGymCentre> viewOwnCentres(int ownerId) {
         List<FlipFitGymCentre> ownerCentres = new ArrayList<>();
-        int ownerId = owner.getUserId();
         for (FlipFitGymCentre centre : gymCentres) {
             if (centre.getOwnerID() == ownerId) {
                 ownerCentres.add(centre);
@@ -142,7 +157,5 @@ public class FlipFitGymOwnerDAO {
         System.out.println("Viewing centres for owner ID: " + ownerId + ". Found " + ownerCentres.size() + " centres.");
         return ownerCentres;
     }
-
-    // --- Helper Methods (Optional, but useful for testing) ---
 
 }
