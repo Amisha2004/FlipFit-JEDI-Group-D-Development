@@ -23,13 +23,13 @@ public class FlipFitCustomerBusinessServices extends FlipFitUserBusinessServices
         return this.flipFitCustomerDAOImpl.viewGymCentres();
     }
     
-    public List<FlipFitBooking> viewBookedSlots(int userId){
+    public List<FlipFitSlots> viewBookedSlots(int userId){
         return this.flipFitCustomerDAOImpl.viewBookedSlots(userId);
     }
     
-    public FlipFitBooking checkBookingConflicts(int userId) {
+    public FlipFitBooking checkBookingConflicts(int userId, int slotTime) {
     	System.out.println("All Booking Conflicts checked!");
-    	return this.flipFitCustomerDAOImpl.checkBookingConflicts(userId);
+    	return this.flipFitCustomerDAOImpl.checkBookingConflicts(userId, slotTime);
     }
     public boolean makePayment(int userId) {
         System.out.println("Make payment called:> ");

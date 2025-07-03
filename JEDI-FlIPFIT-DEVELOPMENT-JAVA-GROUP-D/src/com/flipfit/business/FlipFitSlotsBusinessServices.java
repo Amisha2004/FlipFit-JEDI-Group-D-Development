@@ -3,11 +3,19 @@
  */
 package com.flipfit.business;
 import com.flipfit.bean.FlipFitSlots;
+import com.flipfit.dao.*;
+
 /**
  * 
  */
 public class FlipFitSlotsBusinessServices implements FlipFitSlotsBusinessInterface{
-	public boolean updateAvailability(FlipFitSlots flipFitSlots) {
+    private final FlipFitSlotDAOImpl flipFitSlotDAOImpl;
+    public FlipFitSlotsBusinessServices() {
+        this.flipFitSlotDAOImpl = new FlipFitSlotDAOImpl(); // <--- CRITICAL INITIALIZATION
+        System.out.println("DEBUG: FlipFitCustomerBusinessServices constructor called. DAO initialized.");
+    }
+
+    public boolean updateAvailability(FlipFitSlots flipFitSlots) {
         System.out.println("Updating Slot Availability");
         return true;
     }

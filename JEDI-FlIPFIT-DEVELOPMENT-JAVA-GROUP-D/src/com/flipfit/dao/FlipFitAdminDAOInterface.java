@@ -1,5 +1,6 @@
 package com.flipfit.dao;
 
+import com.flipfit.bean.FlipFitCustomer;
 import com.flipfit.bean.FlipFitGymCentre;
 import com.flipfit.bean.FlipFitGymOwner;
 import com.flipfit.bean.FlipFitUser;
