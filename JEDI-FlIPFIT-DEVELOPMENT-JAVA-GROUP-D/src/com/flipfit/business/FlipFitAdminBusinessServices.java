@@ -5,8 +5,7 @@ package com.flipfit.business;
 import com.flipfit.bean.*;
 import com.flipfit.dao.FlipFitAdminDAOImpl;
 import com.flipfit.dao.FlipFitAdminDAOInterface;
-import com.flipfit.dao.FlipFitUserDAOImpl;
-import com.flipfit.dao.FlipFitUserDAOInterface;
+
 
 import java.util.*;
 

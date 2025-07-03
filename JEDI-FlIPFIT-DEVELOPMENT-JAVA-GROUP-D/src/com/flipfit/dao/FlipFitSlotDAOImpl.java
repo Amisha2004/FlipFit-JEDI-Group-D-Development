@@ -4,6 +4,7 @@ import java.util.*;
 
 import com.flipfit.bean.*;
 import com.flipfit.constants.DBConstants;
+import com.flipfit.exceptions.*;
 
 public class FlipFitSlotDAOImpl {
 
