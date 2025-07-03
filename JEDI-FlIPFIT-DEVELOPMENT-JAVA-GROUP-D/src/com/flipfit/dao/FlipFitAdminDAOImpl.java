@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class FlipFitAdminDAO {
+public class FlipFitAdminDAOImpl implements FlipFitAdminDAOInterface {
     private static List<FlipFitUser> userList = new ArrayList();
     private static List<FlipFitGymCentre> gymCentres = new ArrayList<>();
 
     // Counters for simulating auto-incrementing IDs
     private static AtomicInteger gymIdCounter = new AtomicInteger(0);
-    public FlipFitAdminDAO() {
+    public FlipFitAdminDAOImpl() {
         // Initialize with hardcoded data using setters
         if(userList.isEmpty()) {
             FlipFitAdmin admin = new FlipFitAdmin();
@@ -66,7 +66,6 @@ public class FlipFitAdminDAO {
             centre1.setCity("Bengaluru");
             centre1.setState("Karnataka");
             centre1.setPincode("560034");
-            centre1.setSlot(Arrays.asList(900, 1000, 1100, 1700, 1800)); // Sample slots
             gymCentres.add(centre1);
 
             FlipFitGymCentre centre2 = new FlipFitGymCentre();
@@ -77,7 +76,6 @@ public class FlipFitAdminDAO {
             centre2.setCity("Bengaluru");
             centre2.setState("Karnataka");
             centre2.setPincode("560037");
-            centre2.setSlot(Arrays.asList(800, 900, 1600)); // Sample slots
             gymCentres.add(centre2);
 
             FlipFitGymCentre centre3 = new FlipFitGymCentre();
@@ -88,11 +86,11 @@ public class FlipFitAdminDAO {
             centre3.setCity("Mumbai");
             centre3.setState("Maharashtra");
             centre3.setPincode("400001");
-            centre3.setSlot(Arrays.asList(700, 800, 1200, 1900)); // Sample slots
             gymCentres.add(centre3);
         }
     }
-    public static List<FlipFitGymOwner> getPendingGymOwnerList(){
+
+    public List<FlipFitGymOwner> getPendingGymOwnerList(){
         System.out.println("Here is the pending owner list");
         List<FlipFitGymOwner> pendingGymOwners = new ArrayList<>();
         for(FlipFitUser user: userList){
@@ -105,7 +103,7 @@ public class FlipFitAdminDAO {
         }
         return pendingGymOwners;
     }
-    public static List<FlipFitGymOwner> getApprovedGymOwnerList(){
+    public List<FlipFitGymOwner> getApprovedGymOwnerList(){
         System.out.println("Here is the approved gym owner list");
         List<FlipFitGymOwner> approvedOwners = new ArrayList<>();
         for(FlipFitUser user: userList){
@@ -116,18 +114,11 @@ public class FlipFitAdminDAO {
         }
         return approvedOwners;
     }
-    public static List<FlipFitCustomer> getCustomerList(){
-        System.out.println("Here is the customer list");
-        List<FlipFitCustomer> customers = new ArrayList<>();
-        for(FlipFitUser user: userList){
-            if(user.getRole() == 3){
-                FlipFitCustomer customer = (FlipFitCustomer) user;
-                customers.add(customer);
-            }
-        }
-        return customers;
+    public List<FlipFitUser> getUserList(){
+        System.out.println("Here is the user list");
+        return userList;
     }
-    public static boolean validateOwner(int ownerId){
+    public boolean validateOwner(int ownerId){
         for(FlipFitUser user: userList){
             if(user.getUserId() == ownerId) {
                 FlipFitGymOwner gymOwner = (FlipFitGymOwner) user;
@@ -139,7 +130,7 @@ public class FlipFitAdminDAO {
         System.out.println("Owner not found");
         return false;
     }
-    public static boolean deleteOwner(int ownerId){
+    public boolean deleteOwner(int ownerId){
         for(FlipFitUser user: userList) {
             if (user.getUserId() == ownerId) {
                 userList.remove(user);
@@ -150,7 +141,7 @@ public class FlipFitAdminDAO {
         System.out.println("Owner not found");
         return false;
     }
-    public static List<FlipFitGymCentre> getGymCentreUsingOwnerId(int ownerId){
+    public List<FlipFitGymCentre> getGymCentreUsingOwnerId(int ownerId){
         List<FlipFitGymCentre> centres = new ArrayList<>();
         for(FlipFitGymCentre gymCenter: gymCentres){
             if(gymCenter.getOwnerID() == ownerId){

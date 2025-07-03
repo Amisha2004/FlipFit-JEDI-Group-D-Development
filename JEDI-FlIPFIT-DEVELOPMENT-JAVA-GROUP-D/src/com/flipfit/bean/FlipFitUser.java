@@ -12,9 +12,27 @@ public class FlipFitUser {
     private String password;
     private String emailID;
     private String phoneNumber;
+	private String city;
+	private String pinCode;
     private int role;
-    
-    /**
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getPinCode() {
+		return pinCode;
+	}
+
+	public void setPinCode(String pinCode) {
+		this.pinCode = pinCode;
+	}
+
+	/**
 	 * @return the role
 	 */
 	public int getRole() {

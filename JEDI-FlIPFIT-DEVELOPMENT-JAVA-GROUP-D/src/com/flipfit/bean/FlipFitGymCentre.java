@@ -16,7 +16,6 @@ public class FlipFitGymCentre {
 	private String city;
     private String state;
     private String pincode;
-    private List<Integer> slot;
     
 	/**
 	 * @return the gymID
@@ -101,17 +100,5 @@ public class FlipFitGymCentre {
 	 */
 	public void setPincode(String pincode) {
 		this.pincode = pincode;
-	}
-	/**
-	 * @return the slot
-	 */
-	public List<Integer> getSlot() {
-		return slot;
-	}
-	/**
-	 * @param slot the slot to set
-	 */
-	public void setSlot(List<Integer> slot) {
-		this.slot = slot;
 	}
 }

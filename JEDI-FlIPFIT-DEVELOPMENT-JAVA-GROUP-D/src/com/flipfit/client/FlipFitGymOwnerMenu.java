@@ -70,13 +70,12 @@ public class FlipFitGymOwnerMenu {
 						flipFitSlots.setSlotStartTime(localTime);
 						flipFitSlots.setMaxSeats(maxCapacity);
 						flipFitSlots.setSeatsAvailable(maxCapacity);
-						gymOwnerBusinessServices.addSlot(flipFitSlots);
 						System.out.println("Slot added.");
 						break;
 					}
 					case 3: {
 						System.out.println("View FlipFit Customers: ");
-						List<FlipFitCustomer> customers = gymOwnerBusinessServices.getCustomerList();
+						List<FlipFitCustomer> customers = gymOwnerBusinessServices.getCustomerListByGymId(gymOwner.getUserId());
 						if(customers.isEmpty()) {
 							System.out.println("There are no customers to view this menu.");
 							break;
