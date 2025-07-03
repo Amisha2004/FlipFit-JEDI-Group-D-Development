@@ -4,14 +4,7 @@
 package com.flipfit.business;
 
 import com.flipfit.bean.*;
-import com.flipfit.constants.DBConstants;
 import com.flipfit.dao.*;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.List;
 
 /**
  * Implements the business logic for general user functionalities like
@@ -27,7 +20,7 @@ public class FlipFitUserBusinessServices implements FlipFitUserBusinessInterface
 
 
     @Override
-    public boolean register(FlipFitUser flipFitUser) {
+    public FlipFitUser register(FlipFitUser flipFitUser) {
 
         // Pass the fully-formed object to the DAO to handle the database insertion.
         System.out.println("Business Service: Attempting to register user with DAO...");

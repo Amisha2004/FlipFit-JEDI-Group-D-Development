@@ -4,8 +4,6 @@ import com.flipfit.constants.DBConstants;
 import com.flipfit.exceptions.RegistrationFailedException;
 import com.flipfit.exceptions.UpdationFailedException;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.sql.*;
 import java.util.Random;
 
@@ -40,7 +38,7 @@ public class FlipFitUserDAOImpl implements FlipFitUserDAOInterface {
         return null;
     }
 
-    public boolean register(FlipFitUser FFU) {
+    public FlipFitUser register(FlipFitUser FFU) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(
@@ -66,7 +64,7 @@ public class FlipFitUserDAOImpl implements FlipFitUserDAOInterface {
             if (i > 0) {
                 System.out.println(i + " user added");
                 con.close();
-                return true;
+                return FFU;
             }
             else{
                 con.close();
@@ -76,7 +74,7 @@ public class FlipFitUserDAOImpl implements FlipFitUserDAOInterface {
         {
             System.out.println(e.getMessage());
         }
-        return false;
+        return null;
     }
 
     public void deleteUser(int userId){
