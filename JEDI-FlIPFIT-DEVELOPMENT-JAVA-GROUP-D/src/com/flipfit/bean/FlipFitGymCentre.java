@@ -16,7 +16,7 @@ public class FlipFitGymCentre {
 	private String city;
     private String state;
     private String pincode;
-    private List<Integer>slot;
+    private List<Integer> slot;
     
 	/**
 	 * @return the gymID
