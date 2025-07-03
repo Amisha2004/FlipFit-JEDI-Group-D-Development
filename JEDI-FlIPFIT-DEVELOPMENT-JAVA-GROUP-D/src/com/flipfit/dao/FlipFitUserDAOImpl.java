@@ -18,7 +18,9 @@ public class FlipFitUserDAOImpl implements FlipFitUserDAOInterface {
             stmt.setString(2, password);
             stmt.setInt(3, roleId);
 
+
             try (ResultSet rs = stmt.executeQuery()) {
+                System.out.println("Login Success");
                 if (rs.next()) {
                     FlipFitUser flipFitUser = new FlipFitUser();
                     flipFitUser.setUserName(username);

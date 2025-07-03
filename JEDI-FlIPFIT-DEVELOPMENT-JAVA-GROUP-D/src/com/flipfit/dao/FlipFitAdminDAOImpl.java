@@ -11,7 +11,8 @@ public class FlipFitAdminDAOImpl implements FlipFitAdminDAOInterface {
     @Override
     public List<FlipFitGymOwner> getPendingGymOwnerList(){
         List<FlipFitGymOwner> pendingOwners = new ArrayList<>();
-        String sql = "SELECT ownerId, aadharNumber FROM GymOwner WHERE isApproved = 0";
+//        String sql = "SELECT userId FROM GymOwner WHERE isApproved = 0";
+        String sql = "SELECT u.userId, u.userName, go.aadharNumber FROM User u JOIN GymOwner go ON u.userId = go.userId WHERE go.isApproved = 0";
 
         try (Connection conn = GetConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
@@ -19,8 +20,8 @@ public class FlipFitAdminDAOImpl implements FlipFitAdminDAOInterface {
 
             while (rs.next()) {
                 FlipFitGymOwner owner = new FlipFitGymOwner();
-                owner.setUserId(rs.getInt("ownerId"));
-                owner.setAadharNumber(rs.getString("aadharNumber"));
+                owner.setUserId(rs.getInt("userId"));
+                owner.setUserName(rs.getString("userName"));
                 pendingOwners.add(owner);
             }
         } catch (SQLException e) {
@@ -32,7 +33,8 @@ public class FlipFitAdminDAOImpl implements FlipFitAdminDAOInterface {
     @Override
     public List<FlipFitGymOwner> getApprovedGymOwnerList(){
         List<FlipFitGymOwner> approvedOwners = new ArrayList<>();
-        String sql = "SELECT ownerId, aadharNumber FROM GymOwner WHERE isApproved = 1";
+
+        String sql = "SELECT u.userId, u.userName, go.aadharNumber FROM User u JOIN GymOwner go ON u.userId = go.userId WHERE go.isApproved = 1";
 
         try (Connection conn = GetConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
@@ -40,12 +42,14 @@ public class FlipFitAdminDAOImpl implements FlipFitAdminDAOInterface {
 
             while (rs.next()) {
                 FlipFitGymOwner owner = new FlipFitGymOwner();
-                owner.setUserId(rs.getInt("ownerId"));
+                owner.setUserId(rs.getInt("userId"));
                 owner.setAadharNumber(rs.getString("aadharNumber"));
+                owner.setUserName(rs.getString("userName"));
                 approvedOwners.add(owner);
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.err.println("SQL Error in getApprovedGymOwnerList: " + e.getMessage());
+            e.printStackTrace(); // Keep this for full error details
         }
         return approvedOwners;
     }
@@ -73,10 +77,11 @@ public class FlipFitAdminDAOImpl implements FlipFitAdminDAOInterface {
 
     @Override
     public boolean validateOwner(int ownerId){
-        String sql = "UPDATE GymOwner SET isApproved = 1 WHERE ownerId = ?";
+        String sql = "UPDATE GymOwner SET isApproved = 1 WHERE userId = ?";
         try (Connection conn = GetConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, ownerId);
+            System.out.println("Validated!");
             int affectedRows = stmt.executeUpdate();
             return affectedRows > 0;
         } catch (SQLException e) {
@@ -87,7 +92,7 @@ public class FlipFitAdminDAOImpl implements FlipFitAdminDAOInterface {
 
     @Override
     public boolean deleteOwner(int ownerId){
-        String sql = "DELETE FROM GymOwner WHERE ownerId = ?";
+        String sql = "DELETE FROM User WHERE userId = ?";
         try (Connection conn = GetConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, ownerId);
@@ -113,6 +118,8 @@ public class FlipFitAdminDAOImpl implements FlipFitAdminDAOInterface {
                 while (rs.next()) {
                     FlipFitGymCentre gymCentre = new FlipFitGymCentre();
                     gymCentre.setGymID(rs.getInt("gymId"));
+                    gymCentre.setGymName(rs.getString("gymName"));
+                    gymCentre.setState(rs.getString("state"));
                     gymCentre.setCity(rs.getString("city"));
                     gymCentres.add(gymCentre);
                 }
