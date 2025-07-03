@@ -4,6 +4,7 @@
 package com.flipfit.business;
 import com.flipfit.bean.*;
 import com.flipfit.dao.FlipFitAdminDAO;
+import com.flipfit.dao.FlipFitUserDao;
 
 import java.util.*;
 
@@ -13,7 +14,7 @@ import java.util.*;
 public class FlipFitAdminBusinessServices extends FlipFitUserBusinessServices implements FlipFitAdminBusinessInterface{
 
     public FlipFitAdminBusinessServices() {
-        FlipFitAdminDAO flipFitAdminDAO = new FlipFitAdminDAO(); // Initialize the DAO
+        FlipFitAdminDAO flipFitAdminDAO = new FlipFitAdminDAO();
     }
 
     public List<FlipFitGymOwner> getPendingGymOwnerList(){
