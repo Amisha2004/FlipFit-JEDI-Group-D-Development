@@ -11,7 +11,7 @@ import java.util.List;
 public interface FlipFitAdminDAOInterface {
     public List<FlipFitGymOwner> getPendingGymOwnerList();
     public List<FlipFitGymOwner> getApprovedGymOwnerList();
-    public List<FlipFitCustomer> getUserList();
+    public List<FlipFitUser> getUserList();
     public boolean validateOwner(int ownerId);
     public boolean deleteOwner(int ownerId);
     public List<FlipFitGymCentre> getGymCentreUsingOwnerId(int ownerId);

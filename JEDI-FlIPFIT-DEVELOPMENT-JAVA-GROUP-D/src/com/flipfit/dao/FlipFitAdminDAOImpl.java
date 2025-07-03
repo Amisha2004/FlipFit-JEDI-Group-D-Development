@@ -51,8 +51,8 @@ public class FlipFitAdminDAOImpl implements FlipFitAdminDAOInterface {
     }
 
     @Override
-    public List<FlipFitCustomer> getUserList(){
-        List<FlipFitCustomer> users = new ArrayList<>();
+    public List<FlipFitUser> getUserList(){
+        List<FlipFitUser> users = new ArrayList<>();
         String sql = "SELECT * FROM User";
 
         try (Connection conn = GetConnection.getConnection();
@@ -60,7 +60,7 @@ public class FlipFitAdminDAOImpl implements FlipFitAdminDAOInterface {
              ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 // Assuming you have a User class
-                FlipFitCustomer user = new FlipFitCustomer(); // Replace with actual User class
+                FlipFitUser user = new FlipFitUser(); // Replace with actual User class
                 user.setUserId(rs.getInt("userId"));
                 user.setUserName(rs.getString("userName"));
                 users.add(user);

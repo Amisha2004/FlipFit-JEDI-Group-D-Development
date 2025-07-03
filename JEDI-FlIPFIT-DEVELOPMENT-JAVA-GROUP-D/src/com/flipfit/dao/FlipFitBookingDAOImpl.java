@@ -2,6 +2,7 @@ package com.flipfit.dao;
 
 import com.flipfit.bean.*;
 import com.flipfit.constants.DBConstants;
+import com.flipfit.exceptions.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -49,7 +50,7 @@ public class FlipFitBookingDAOImpl implements FlipFitBookingDAOInterface{
                 throw new BookingCancellationFailedException("Deleting booking failed, no rows affected.");
             }
             return true;
-        } catch (exception | SQLException e) {
+        } catch (SQLException | BookingCancellationFailedException e) {
             System.out.println(e.getMessage());
         }
         return false;
