@@ -11,7 +11,6 @@ public class FlipFitSlots {
     private LocalDate slotDate;
     private int seatsAvailable;
     private int maxSeats;
-    public List<Integer>waitListBookingId;
     /**
 	 * @return the slotId
 	 */
@@ -83,18 +82,6 @@ public class FlipFitSlots {
 	 */
 	public void setMaxSeats(int maxSeats) {
 		this.maxSeats = maxSeats;
-	}
-	/**
-	 * @return the waitList
-	 */
-	public List<Integer> getWaitList() {
-		return waitListBookingId;
-	}
-	/**
-	 * @param waitList the waitList to set
-	 */
-	public void setWaitList(List<Integer> waitListBookingId) {
-		this.waitListBookingId = waitListBookingId;
 	}
 	
 }

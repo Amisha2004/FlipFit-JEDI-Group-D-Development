@@ -3,8 +3,10 @@
  */
 package com.flipfit.business;
 import com.flipfit.bean.*;
-import com.flipfit.dao.FlipFitAdminDAO;
-import com.flipfit.dao.FlipFitUserDao;
+import com.flipfit.dao.FlipFitAdminDAOImpl;
+import com.flipfit.dao.FlipFitAdminDAOInterface;
+import com.flipfit.dao.FlipFitUserDAOImpl;
+import com.flipfit.dao.FlipFitUserDAOInterface;
 
 import java.util.*;
 
@@ -12,28 +14,29 @@ import java.util.*;
  * 
  */
 public class FlipFitAdminBusinessServices extends FlipFitUserBusinessServices implements FlipFitAdminBusinessInterface{
+    private final FlipFitAdminDAOInterface flipFitAdminDAOImpl;
 
     public FlipFitAdminBusinessServices() {
-        FlipFitAdminDAO flipFitAdminDAO = new FlipFitAdminDAO();
+        this.flipFitAdminDAOImpl = new FlipFitAdminDAOImpl();
     }
 
     public List<FlipFitGymOwner> getPendingGymOwnerList(){
-        return FlipFitAdminDAO.getPendingGymOwnerList();
+        return flipFitAdminDAOImpl.getPendingGymOwnerList();
     }
 
     public List<FlipFitGymOwner> getApprovedGymOwnerList(){
-        return FlipFitAdminDAO.getApprovedGymOwnerList();
+        return flipFitAdminDAOImpl.getApprovedGymOwnerList();
     }
-    public List<FlipFitCustomer> getCustomerList(){
-        return FlipFitAdminDAO.getCustomerList();
+    public List<FlipFitUser> getUserList(){
+        return flipFitAdminDAOImpl.getUserList();
     }
     public boolean validateOwner(int ownerId){
-        return FlipFitAdminDAO.validateOwner(ownerId);
+        return flipFitAdminDAOImpl.validateOwner(ownerId);
     }
     public boolean deleteOwner(int ownerId){
-        return FlipFitAdminDAO.deleteOwner(ownerId);
+        return flipFitAdminDAOImpl.deleteOwner(ownerId);
     }
     public List<FlipFitGymCentre> getGymCentreUsingOwnerId(int ownerId){
-        return FlipFitAdminDAO.getGymCentreUsingOwnerId(ownerId);
+        return flipFitAdminDAOImpl.getGymCentreUsingOwnerId(ownerId);
     }
 }

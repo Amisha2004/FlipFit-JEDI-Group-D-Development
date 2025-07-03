@@ -14,4 +14,12 @@ public class FlipFitSlotsBusinessServices implements FlipFitSlotsBusinessInterfa
     public void getSlotDetails() {
         System.out.println("Getting Slot Details");
     }
+    public FlipFitSlots addSlot(FlipFitSlots flipFitSlots) {
+        System.out.println("Adding new Slot Details");
+        return flipFitSlots;
+    };
+    public boolean deleteSlot(int slotId) {
+        System.out.println("Deleting Slot Details");
+        return true;
+    };
 }

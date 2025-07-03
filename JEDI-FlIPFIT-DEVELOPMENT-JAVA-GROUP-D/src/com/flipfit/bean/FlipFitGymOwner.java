@@ -9,21 +9,16 @@ import java.util.List;
  */
 public class FlipFitGymOwner extends FlipFitUser {
 	public String gstNumber;
+	public String panNumber;
 	public String aadharNumber;
     public boolean isApproved;
-	public List<Integer>gymsOwned;
-    
-    /**
-	 * @return the gymsOwned
-	 */
-	public List<Integer> getGymsOwned() {
-		return gymsOwned;
+
+	public String getPanNumber() {
+		return panNumber;
 	}
-	/**
-	 * @param gymsOwned the gymsOwned to set
-	 */
-	public void setGymsOwned(List<Integer> gymsOwned) {
-		this.gymsOwned = gymsOwned;
+
+	public void setPanNumber(String panNumber) {
+		this.panNumber = panNumber;
 	}
 	/**
 	 * @return the gstNumber
