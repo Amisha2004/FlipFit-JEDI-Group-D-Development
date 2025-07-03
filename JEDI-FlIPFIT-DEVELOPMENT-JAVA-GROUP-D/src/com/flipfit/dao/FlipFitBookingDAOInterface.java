@@ -11,5 +11,5 @@ public interface FlipFitBookingDAOInterface {
 
     public List<FlipFitBooking> getAllBookings(int userId);
 
-    public FlipFitBooking getBookingDetailsByBookingId(int bookingId);
+    public List<FlipFitBooking> getBookingDetailsByBookingId(int bookingId);
 }
