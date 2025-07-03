@@ -6,6 +6,7 @@ package com.flipfit.client;
 import com.flipfit.bean.*;
 import com.flipfit.business.*;
 
+import java.sql.Time;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Scanner;
@@ -62,7 +63,8 @@ public class FlipFitGymOwnerMenu {
 						System.out.println("Enter Gym centre ID: ");
 						int gymId = in.nextInt();
 						System.out.println("Enter slot time: ");
-//						LocalTime localTime = LocalTime.parse(in.next());
+//						Time localTime = Time.parse(in.next());
+            
 						System.out.println("Enter max capacity: ");
 						int maxCapacity = in.nextInt();
 						FlipFitSlots flipFitSlots = new FlipFitSlots();
