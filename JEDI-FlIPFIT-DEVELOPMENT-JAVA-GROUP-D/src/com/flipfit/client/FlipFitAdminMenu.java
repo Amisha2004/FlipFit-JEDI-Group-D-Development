@@ -67,9 +67,9 @@ public class FlipFitAdminMenu {
 						for(FlipFitGymOwner approvedGymOwner : approvedGymOwners) {
 							System.out.println(ColorConstants.PURPLE + "Owner ID: " + approvedGymOwner.getUserId() + " Owner Name: " + approvedGymOwner.getUserName() + ColorConstants.RESET);
 						}
-						System.out.println(ColorConstants.YELLOW + "Do you want to approve any Gym Owner? (Y/N): " + ColorConstants.RESET);
+						System.out.println(ColorConstants.YELLOW + "Do you want to delete any Gym Owner? (Y/N): " + ColorConstants.RESET);
 						if(in.nextLine().equalsIgnoreCase("N")) break;
-						System.out.println(ColorConstants.YELLOW + "Enter Gym Owner ID you want to approve: " + ColorConstants.RESET);
+						System.out.println(ColorConstants.YELLOW + "Enter Gym Owner ID you want to delete: " + ColorConstants.RESET);
 						int ownerId = in.nextInt();
 						boolean delete = adminBusinessServices.deleteOwner(ownerId);
 						if(delete) System.out.println(ColorConstants.GREEN + "Gym Owner with ID: " + ownerId + " is deleted" + ColorConstants.RESET);

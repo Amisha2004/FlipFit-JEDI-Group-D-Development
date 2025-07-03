@@ -7,7 +7,6 @@ import java.util.List;
 import com.flipfit.bean.*;
 import com.flipfit.dao.FlipFitGymOwnerDAOImpl;
 import com.flipfit.dao.FlipFitGymOwnerDAOInterface;
-import com.flipfit.dao.FlipFitUserDAOInterface;
 
 /**
  * 
@@ -39,5 +38,8 @@ public class FlipFitGymOwnerBusinessServices extends FlipFitUserBusinessServices
     }
     public FlipFitGymOwner addGymOwner(FlipFitGymOwner owner, FlipFitUser user){
         return flipFitGymOwnerDAOImpl.addGymOwner(owner, user);
+    }
+    public boolean deleteGymCentre(int gymId){
+        return flipFitGymOwnerDAOImpl.deleteGymOwner(gymId);
     }
 }

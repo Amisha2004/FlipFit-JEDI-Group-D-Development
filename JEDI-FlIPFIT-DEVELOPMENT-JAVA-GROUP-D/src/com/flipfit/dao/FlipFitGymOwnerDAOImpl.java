@@ -108,4 +108,8 @@ public class FlipFitGymOwnerDAOImpl implements FlipFitGymOwnerDAOInterface {
         owner.setUserId(user.getUserId());
         return owner;
     }
+
+    public boolean deleteGymOwner(int gymId) {
+        return true;
+    }
 }

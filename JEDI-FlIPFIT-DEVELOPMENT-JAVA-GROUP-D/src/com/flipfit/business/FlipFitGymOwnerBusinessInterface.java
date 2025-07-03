@@ -17,4 +17,5 @@ public interface FlipFitGymOwnerBusinessInterface {
 	public List<FlipFitGymCentre> viewOwnCentres(FlipFitGymOwner owner);
 	public FlipFitGymOwner editDetails(FlipFitGymOwner owner);
 	public FlipFitGymOwner addGymOwner(FlipFitGymOwner owner, FlipFitUser user);
+	public boolean deleteGymCentre(int gymId);
 }

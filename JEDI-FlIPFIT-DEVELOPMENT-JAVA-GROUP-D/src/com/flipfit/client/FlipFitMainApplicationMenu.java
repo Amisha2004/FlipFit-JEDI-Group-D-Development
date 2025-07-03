@@ -46,8 +46,9 @@ public class FlipFitMainApplicationMenu{
 				switch (choice) {
 					case 1: {
 						System.out.println(ColorConstants.CYAN + "==========Login Page==========" + ColorConstants.RESET);
-						System.out.print(ColorConstants.YELLOW + "Enter your User Name: " + ColorConstants.RESET);
-						String username = in.next();
+            
+						System.out.print(ColorConstants.YELLOW + "Enter your User Name : " + ColorConstants.RESET);
+						String userName = in.next();
 						System.out.print(ColorConstants.YELLOW + "Enter your password: " + ColorConstants.RESET);
 						String password = in.next();
 
@@ -55,7 +56,7 @@ public class FlipFitMainApplicationMenu{
 								Enter your role:>
 								1 -> Admin
 								2 -> GymOwner
-								3 -> GymCustomer
+								3 -> Customer
 								"""+ ColorConstants.RESET);
 
 
@@ -64,7 +65,7 @@ public class FlipFitMainApplicationMenu{
 						switch (role) {
 							case 1: {
 								FlipFitAdmin admin = new FlipFitAdmin();
-								admin.setUserName(username);
+								admin.setUserName(userName);
 								admin.setPassword(password);
 								admin.setRole(role);
 								FlipFitAdminBusinessServices flipFitAdminBusinessServices = new FlipFitAdminBusinessServices();
@@ -75,7 +76,7 @@ public class FlipFitMainApplicationMenu{
 							}
 							case 2: {
 								FlipFitGymOwner gymOwner = new FlipFitGymOwner();
-								gymOwner.setUserName(username);
+								gymOwner.setUserName(userName);
 								gymOwner.setPassword(password);
 								gymOwner.setRole(role);
 								FlipFitGymOwnerBusinessServices flipFitGymOwnerBusinessServices = new FlipFitGymOwnerBusinessServices();
@@ -91,6 +92,18 @@ public class FlipFitMainApplicationMenu{
 								FlipFitCustomerBusinessServices flipFitCustomerBusinessServices = new FlipFitCustomerBusinessServices();
 								FlipFitUser user = flipFitCustomerBusinessServices.logIn(gymCustomer);
 								if (user != null) FlipFitCustomerMenu.getFlipFitCustomerMenu(gymCustomer);
+								break;
+							}
+							case 3: {
+								FlipFitCustomer gymCustomer = new FlipFitCustomer();
+								gymCustomer.setUserName(userName);
+								gymCustomer.setPassword(password);
+								FlipFitCustomerBusinessServices customerBusinessServices = new FlipFitCustomerBusinessServices();
+								gymCustomer = (FlipFitCustomer) customerBusinessServices.logIn(gymCustomer);
+								if (gymCustomer == null){
+									throw new InvalidLoginException();
+								}
+								FlipFitCustomerMenu.getFlipFitCustomerMenu(gymCustomer);
 								break;
 							}
 						}
