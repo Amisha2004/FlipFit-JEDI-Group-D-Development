@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FlipFitUserDao {
-    private final List<FlipFitUser> userList = new ArrayList<>();
+    private static List<FlipFitUser> userList = new ArrayList<>();
 
-    public void FlipFitUserDAO() {
+    public FlipFitUserDao() {
         // Initialize with hardcoded data using setters
         FlipFitAdmin admin = new FlipFitAdmin();
         admin.setUserId(1);
@@ -57,16 +57,16 @@ public class FlipFitUserDao {
         return userList;
     }
 
-    public FlipFitUser login(String email, String password) {
+    public static FlipFitUser login(String name, String password) {
         for (FlipFitUser user : userList) {
-            if (user.getEmailID().equalsIgnoreCase(email) && user.getPassword().equals(password)) {
+            if (user.getUserName().equalsIgnoreCase(name) && user.getPassword().equals(password)) {
                 return user;
             }
         }
         return null;
     }
 
-    public boolean register(FlipFitUser user) {
+    public static boolean register(FlipFitUser user) {
         for (FlipFitUser existingUser : userList) {
             if (existingUser.getEmailID().equalsIgnoreCase(user.getEmailID())) {
                 System.out.println("DAO: Registration failed. Email already in use.");

@@ -4,6 +4,7 @@
 package com.flipfit.business;
 
 import com.flipfit.bean.*;
+import com.flipfit.dao.FlipFitAdminDAO;
 import com.flipfit.dao.FlipFitUserDao;
 
 import java.util.List;
@@ -15,42 +16,23 @@ import java.util.List;
 public class FlipFitUserBusinessServices implements FlipFitUserBusinessInterface {
 
     // Instantiate the DAOs that this service will interact with.
-    private final FlipFitUserDao userDao = new FlipFitUserDao();
+    public FlipFitUserBusinessServices() {
+        FlipFitUserDao flipFitUserDao = new FlipFitUserDao();
+    }
+
+
 
     @Override
-    public boolean register(String userName, String password, String emailID, String phoneNumber, String role) {
-        FlipFitUser newUser;
-
-        // Business Logic: Create the correct type of user object based on the role string.
-        if ("Customer".equalsIgnoreCase(role)) {
-            FlipFitCustomer customer = new FlipFitCustomer();
-            customer.setRole(3); // 3 is the Role ID for Customer
-            newUser = customer;
-        } else if ("GymOwner".equalsIgnoreCase(role)) {
-            FlipFitGymOwner owner = new FlipFitGymOwner();
-            owner.setRole(2); // 2 is the Role ID for GymOwner
-            owner.setApproved(false); // New owners must be approved by an admin
-            // In a real app, you would prompt for GST/Aadhar here or on a separate screen.
-            newUser = owner;
-        } else {
-            System.out.println("Business Service: Invalid role specified for registration.");
-            return false;
-        }
-
-        // Set the common properties shared by all users.
-        newUser.setUserName(userName);
-        newUser.setPassword(password);
-        newUser.setEmailID(emailID);
-        newUser.setPhoneNumber(phoneNumber);
+    public boolean register(FlipFitUser flipFitUser) {
 
         // Pass the fully-formed object to the DAO to handle the database insertion.
         System.out.println("Business Service: Attempting to register user with DAO...");
-        return userDao.register(newUser);
+        return FlipFitUserDao.register(flipFitUser);
     }
 
     public FlipFitUser logIn(FlipFitUser FlipFitUser) {
         System.out.println("Business Service: Verifying credentials via DAO...");
-        FlipFitUser user = userDao.login(FlipFitUser.getEmailID(), FlipFitUser.getPassword());
+        FlipFitUser user = FlipFitUserDao.login(FlipFitUser.getUserName(), FlipFitUser.getPassword());
         if (user != null) {
             System.out.println("Business Service: Login successful for " + user.getUserName());
         } else {
