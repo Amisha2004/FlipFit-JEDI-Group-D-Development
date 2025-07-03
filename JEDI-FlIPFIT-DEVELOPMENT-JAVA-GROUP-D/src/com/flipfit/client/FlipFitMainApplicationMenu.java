@@ -46,53 +46,51 @@ public class FlipFitMainApplicationMenu{
 				switch (choice) {
 					case 1: {
 						System.out.println(ColorConstants.CYAN + "==========Login Page==========" + ColorConstants.RESET);
-						System.out.print(ColorConstants.YELLOW + "Enter your Email ID : " + ColorConstants.RESET);
-						String emailId = in.next();
+						System.out.print(ColorConstants.YELLOW + "Enter your User Name: " + ColorConstants.RESET);
+						String username = in.next();
 						System.out.print(ColorConstants.YELLOW + "Enter your password: " + ColorConstants.RESET);
 						String password = in.next();
 
 						System.out.print(ColorConstants.YELLOW +"""
 								Enter your role:>
 								1 -> Admin
-								2 -> Customer
-								3 -> GymOwner
+								2 -> GymOwner
+								3 -> GymCustomer
 								"""+ ColorConstants.RESET);
+
 
 						int role = in.nextInt();
 
 						switch (role) {
 							case 1: {
 								FlipFitAdmin admin = new FlipFitAdmin();
-								admin.setUserName(emailId);
+								admin.setUserName(username);
 								admin.setPassword(password);
+								admin.setRole(role);
 								FlipFitAdminBusinessServices flipFitAdminBusinessServices = new FlipFitAdminBusinessServices();
 								FlipFitUser user = flipFitAdminBusinessServices.logIn(admin);
 								if (user != null) FlipFitAdminMenu.getFlipFitAdminMenu(admin);
-								else System.out.println(ColorConstants.RED + "Login Failed. Please try again." + ColorConstants.RESET);
 								break;
+
 							}
 							case 2: {
-								FlipFitCustomer gymCustomer = new FlipFitCustomer();
-								gymCustomer.setEmailID(emailId);
-								gymCustomer.setPassword(password);
-								FlipFitCustomerBusinessServices customerBusinessServices = new FlipFitCustomerBusinessServices();
-								gymCustomer = (FlipFitCustomer) customerBusinessServices.logIn(gymCustomer);
-								if (gymCustomer == null){
-									throw new InvalidLoginException();
-								}
-								FlipFitCustomerMenu.getFlipFitCustomerMenu(gymCustomer);
+								FlipFitGymOwner gymOwner = new FlipFitGymOwner();
+								gymOwner.setUserName(username);
+								gymOwner.setPassword(password);
+								gymOwner.setRole(role);
+								FlipFitGymOwnerBusinessServices flipFitGymOwnerBusinessServices = new FlipFitGymOwnerBusinessServices();
+								FlipFitUser user = flipFitGymOwnerBusinessServices.logIn(gymOwner);
+								if (user != null) FlipFitGymOwnerMenu.getFlipFitGymOwnerMenu(gymOwner);
 								break;
 							}
 							case 3: {
-								FlipFitGymOwner gymOwner = new FlipFitGymOwner();
-								gymOwner.setEmailID(emailId);
-								gymOwner.setPassword(password);
-								FlipFitGymOwnerBusinessServices flipFitGymOwnerBusinessServices = new FlipFitGymOwnerBusinessServices();
-								gymOwner = (FlipFitGymOwner) flipFitGymOwnerBusinessServices.logIn(gymOwner);
-								if (gymOwner == null){
-									throw new InvalidLoginException();
-								}
-								FlipFitGymOwnerMenu.getFlipFitGymOwnerMenu(gymOwner);
+								FlipFitCustomer gymCustomer = new FlipFitCustomer();
+								gymCustomer.setUserName(username);
+								gymCustomer.setPassword(password);
+								gymCustomer.setRole(role);
+								FlipFitCustomerBusinessServices flipFitCustomerBusinessServices = new FlipFitCustomerBusinessServices();
+								FlipFitUser user = flipFitCustomerBusinessServices.logIn(gymCustomer);
+								if (user != null) FlipFitCustomerMenu.getFlipFitCustomerMenu(gymCustomer);
 								break;
 							}
 						}
@@ -190,9 +188,7 @@ public class FlipFitMainApplicationMenu{
 			}
 		} catch (InvalidChoiceException e) {
 			throw new RuntimeException(e);
-		} catch (InvalidLoginException e) {
-			throw new RuntimeException(e);
 		}
-	}
+    }
 }
                    

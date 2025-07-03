@@ -11,7 +11,6 @@ public class FlipFitAdminDAOImpl implements FlipFitAdminDAOInterface {
     @Override
     public List<FlipFitGymOwner> getPendingGymOwnerList(){
         List<FlipFitGymOwner> pendingOwners = new ArrayList<>();
-//        String sql = "SELECT userId FROM GymOwner WHERE isApproved = 0";
         String sql = "SELECT u.userId, u.userName, go.aadharNumber FROM User u JOIN GymOwner go ON u.userId = go.userId WHERE go.isApproved = 0";
 
         try (Connection conn = GetConnection.getConnection();
