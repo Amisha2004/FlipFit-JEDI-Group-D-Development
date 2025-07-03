@@ -64,6 +64,7 @@ public class FlipFitGymOwnerMenu {
 						int gymId = in.nextInt();
 						System.out.println("Enter slot time: ");
 //						Time localTime = Time.parse(in.next());
+            
 						System.out.println("Enter max capacity: ");
 						int maxCapacity = in.nextInt();
 						FlipFitSlots flipFitSlots = new FlipFitSlots();
