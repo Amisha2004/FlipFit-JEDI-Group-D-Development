@@ -1,6 +1,8 @@
 package com.flipfit.dao;
 import com.flipfit.bean.*;
 import com.flipfit.constants.DBConstants;
+import com.flipfit.exceptions.RegistrationFailedException;
+import com.flipfit.exceptions.UpdationFailedException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,20 +13,21 @@ public class FlipFitUserDAOImpl implements FlipFitUserDAOInterface {
     Random rand = new Random();
 
     @Override
-    public FlipFitUser login(String emailId, String password) {
-        String sql = "SELECT * from User where emailID=? and password=? and roleId=0";
+    public FlipFitUser login(String username, String password, int roleId) {
+        String sql = "SELECT * from User where userName=? and password=? and roleId=?";
         try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, emailId);
+            stmt.setString(1, username);
             stmt.setString(2, password);
+            stmt.setInt(3, roleId);
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     FlipFitUser flipFitUser = new FlipFitUser();
-                    flipFitUser.setEmailID(emailId);
+                    flipFitUser.setUserName(username);
                     flipFitUser.setPassword(password);
+                    flipFitUser.setRole(roleId);
                     flipFitUser.setUserId(rs.getInt("userId"));
-                    flipFitUser.setRole(rs.getInt("roleId"));
-                    flipFitUser.setUserName(rs.getString("userName"));
+                    flipFitUser.setEmailID(rs.getString("emailId"));
                     return flipFitUser;
                 }
                 else{
@@ -62,13 +65,13 @@ public class FlipFitUserDAOImpl implements FlipFitUserDAOInterface {
             int i = stmt.executeUpdate();
             if (i > 0) {
                 System.out.println(i + " user added");
+                con.close();
                 return true;
             }
             else{
+                con.close();
                 throw new RegistrationFailedException();
-                return false;
             }
-            con.close();
         } catch (Exception e)
         {
             System.out.println(e.getMessage());
@@ -103,7 +106,6 @@ public class FlipFitUserDAOImpl implements FlipFitUserDAOInterface {
             }
             else {
                 throw new UpdationFailedException();
-                return null;
             }
         } catch (UpdationFailedException e) {
             System.out.println(e.getMessage());

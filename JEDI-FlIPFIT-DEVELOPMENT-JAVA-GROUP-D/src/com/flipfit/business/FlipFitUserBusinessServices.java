@@ -36,7 +36,7 @@ public class FlipFitUserBusinessServices implements FlipFitUserBusinessInterface
 
     public FlipFitUser logIn(FlipFitUser FlipFitUser) {
         System.out.println("Business Service: Verifying credentials via DAO...");
-        FlipFitUser user = flipFitUserDAOImpl.login(FlipFitUser.getUserName(), FlipFitUser.getPassword());
+        FlipFitUser user = flipFitUserDAOImpl.login(FlipFitUser.getUserName(), FlipFitUser.getPassword(),  FlipFitUser.getRole());
         if (user != null) {
             System.out.println("Business Service: Login successful for " + user.getUserName());
         } else {

@@ -1,12 +1,15 @@
 package com.flipfit.bean;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class FlipFitSlots {
 	private int slotId;
 	private int gymId;
-    private String slotStartTime;
-    private LocalDate slotDate;
+    private Time slotStartTime;
+    private Date slotDate;
     private int seatsAvailable;
     private int maxSeats;
     /**
@@ -36,25 +39,25 @@ public class FlipFitSlots {
 	/**
 	 * @return the slotStartTime
 	 */
-	public String getSlotStartTime() {
+	public Time getSlotStartTime() {
 		return slotStartTime;
 	}
 	/**
 	 * @param slotStartTime the slotStartTime to set
 	 */
-	public void setSlotStartTime(String slotStartTime) {
+	public void setSlotStartTime(Time slotStartTime) {
 		this.slotStartTime = slotStartTime;
 	}
 	/**
 	 * @return the slotDate
 	 */
-	public int getSlotDate() {
+	public Date getSlotDate() {
 		return slotDate;
 	}
 	/**
 	 * @param slotDate the slotDate to set
 	 */
-	public void setSlotDate(LocalDate slotDate) {
+	public void setSlotDate(Date slotDate) {
 		this.slotDate = slotDate;
 	}
 	/**

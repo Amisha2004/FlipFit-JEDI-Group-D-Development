@@ -11,7 +11,7 @@ public class FlipFitAdminDAOImpl implements FlipFitAdminDAOInterface {
     @Override
     public List<FlipFitGymOwner> getPendingGymOwnerList(){
         List<FlipFitGymOwner> pendingOwners = new ArrayList<>();
-        String sql = "SELECT ownerID, aadharNumber FROM GymOwner WHERE approved = 0";
+        String sql = "SELECT ownerId, aadharNumber FROM GymOwner WHERE isApproved = 0";
 
         try (Connection conn = GetConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
@@ -19,7 +19,7 @@ public class FlipFitAdminDAOImpl implements FlipFitAdminDAOInterface {
 
             while (rs.next()) {
                 FlipFitGymOwner owner = new FlipFitGymOwner();
-                owner.setUserId(rs.getInt("ownerID"));
+                owner.setUserId(rs.getInt("ownerId"));
                 owner.setAadharNumber(rs.getString("aadharNumber"));
                 pendingOwners.add(owner);
             }
@@ -32,7 +32,7 @@ public class FlipFitAdminDAOImpl implements FlipFitAdminDAOInterface {
     @Override
     public List<FlipFitGymOwner> getApprovedGymOwnerList(){
         List<FlipFitGymOwner> approvedOwners = new ArrayList<>();
-        String sql = "SELECT ownerID, aadharNumber FROM GymOwner WHERE approved = 1";
+        String sql = "SELECT ownerId, aadharNumber FROM GymOwner WHERE isApproved = 1";
 
         try (Connection conn = GetConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
@@ -40,7 +40,7 @@ public class FlipFitAdminDAOImpl implements FlipFitAdminDAOInterface {
 
             while (rs.next()) {
                 FlipFitGymOwner owner = new FlipFitGymOwner();
-                owner.setUserId(rs.getInt("ownerID"));
+                owner.setUserId(rs.getInt("ownerId"));
                 owner.setAadharNumber(rs.getString("aadharNumber"));
                 approvedOwners.add(owner);
             }
@@ -73,7 +73,7 @@ public class FlipFitAdminDAOImpl implements FlipFitAdminDAOInterface {
 
     @Override
     public boolean validateOwner(int ownerId){
-        String sql = "UPDATE GymOwner SET approved = 1 WHERE ownerID = ?";
+        String sql = "UPDATE GymOwner SET isApproved = 1 WHERE ownerId = ?";
         try (Connection conn = GetConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, ownerId);
@@ -87,7 +87,7 @@ public class FlipFitAdminDAOImpl implements FlipFitAdminDAOInterface {
 
     @Override
     public boolean deleteOwner(int ownerId){
-        String sql = "DELETE FROM GymOwner WHERE ownerID = ?";
+        String sql = "DELETE FROM GymOwner WHERE ownerId = ?";
         try (Connection conn = GetConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, ownerId);
@@ -102,7 +102,7 @@ public class FlipFitAdminDAOImpl implements FlipFitAdminDAOInterface {
     @Override
     public List<FlipFitGymCentre> getGymCentreUsingOwnerId(int ownerId){
         List<FlipFitGymCentre> gymCentres = new ArrayList<>();
-        String sql = "SELECT * FROM GymCentre WHERE ownerID = ? AND approved = 1";
+        String sql = "SELECT * FROM GymCentre WHERE ownerId = ? AND approvalStatus = 1";
 
         try (Connection conn = GetConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -112,7 +112,7 @@ public class FlipFitAdminDAOImpl implements FlipFitAdminDAOInterface {
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     FlipFitGymCentre gymCentre = new FlipFitGymCentre();
-                    gymCentre.setGymID(rs.getInt("gymID"));
+                    gymCentre.setGymID(rs.getInt("gymId"));
                     gymCentre.setCity(rs.getString("city"));
                     gymCentres.add(gymCentre);
                 }

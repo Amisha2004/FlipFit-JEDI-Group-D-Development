@@ -4,6 +4,8 @@ import com.flipfit.bean.BookingStatus;
 import com.flipfit.bean.FlipFitBooking;
 import com.flipfit.bean.*;
 
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +17,7 @@ public interface FlipFitCustomerDAOInterface {
      * @param userId The ID of the user.
      * @return A FlipFitBooking object
      */
-    public FlipFitBooking checkBookingConflicts(int userId, int slotTime);
+    public FlipFitBooking checkBookingConflicts(int userId, Time slotTime);
 
     /**
      * viewCentres
@@ -29,11 +31,11 @@ public interface FlipFitCustomerDAOInterface {
      * @param userID The ID of the user.
      * @return True
      */
-    public boolean makePayment(int userID);
+    public boolean makePayment(int userID, String paymentInfo);
 
     /**
      * viewPaymentDetails
      * @param userID
      */
-    public void viewPaymentDetails(int userID);
+    public List<FlipFitPayments> viewPaymentDetails(int userID);
 }

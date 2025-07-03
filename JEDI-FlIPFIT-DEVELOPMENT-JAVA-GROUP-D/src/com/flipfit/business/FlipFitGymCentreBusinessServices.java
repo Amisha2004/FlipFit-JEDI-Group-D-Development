@@ -3,34 +3,36 @@
  */
 package com.flipfit.business;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.flipfit.bean.*;
 import com.flipfit.dao.FlipFitAdminDAOImpl;
 import com.flipfit.dao.FlipFitAdminDAOInterface;
+import com.flipfit.dao.FlipFitCustomerDAOImpl;
+import com.flipfit.dao.*;
 
 /**
  * 
  */
 public class FlipFitGymCentreBusinessServices implements FlipFitGymCentreBusinessInterface{
-	public FlipFitGymCentre updateGymCentre(FlipFitGymCentre flipFitGymCentre){
-        System.out.println("Updating Gym Centre:> ");
-        return flipFitGymCentre;
+    private final FlipFitGymCentreDAOInterface flipFitGymCentreDAOImpl;
+    public FlipFitGymCentreBusinessServices() {
+        this.flipFitGymCentreDAOImpl = new FlipFitGymCentreDAOImpl();
     }
-
-    public boolean deleteGymCentre(int centreId){
-        System.out.println("Deleting Gym Centre:> ");
-        return true;
+    public FlipFitGymCentre updateGymCentre(FlipFitGymCentre FFGC){
+        return flipFitGymCentreDAOImpl.updateGymCentre(FFGC);
     }
-
-    public boolean isGymCentreAvailable(int centreId){
-        return true;
+    public void deleteGymCentre(FlipFitGymCentre FFGC){
+        flipFitGymCentreDAOImpl.deleteGymCentre(FFGC);
     }
-
-    public List<FlipFitSlots> viewAvailableSlots(int centreId) {
-        System.out.println("Viewing Available Slots:> ");
-
-//        FlipFitGymCentre flipFitGymCentre = new FlipFitGymCentre();
-        return null;
+    public boolean isGymCentreAvailable(int centreID){
+        return flipFitGymCentreDAOImpl.isGymCentreAvailable(centreID);
+    }
+    public ArrayList<FlipFitGymCentre> viewCentres(String city){
+        return flipFitGymCentreDAOImpl.viewCentres(city);
+    }
+    public ArrayList<FlipFitSlots> viewAvailableSlots(FlipFitGymCentre FFGC){
+        return flipFitGymCentreDAOImpl.viewAvailableSlots(FFGC);
     }
 }

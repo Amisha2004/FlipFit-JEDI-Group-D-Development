@@ -39,7 +39,7 @@ public class FlipFitPaymentsDAOImpl implements FlipFitPaymentsDAOInterface {
             Connection con = DriverManager.getConnection(
                     DBConstants.DB_URL,DBConstants.USER,DBConstants.PASSWORD);
 
-            PreparedStatement stmt = con.prepareStatement("DELETE FROM Payments WHERE userID=(?)");
+            PreparedStatement stmt = con.prepareStatement("DELETE FROM Payments WHERE userId = ?");
 
             stmt.setInt(1, FFP.getUserID());
 

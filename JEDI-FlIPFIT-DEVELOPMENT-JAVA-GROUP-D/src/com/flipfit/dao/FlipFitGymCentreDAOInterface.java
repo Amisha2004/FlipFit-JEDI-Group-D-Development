@@ -1,18 +1,17 @@
-/**
- * 
- */
-package com.flipfit.business;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.flipfit.dao;
 
 import com.flipfit.bean.FlipFitGymCentre;
 import com.flipfit.bean.FlipFitSlots;
+import com.flipfit.constants.DBConstants;
+import com.flipfit.exceptions.UpdationFailedException;
 
-/**
- * 
- */
-public interface FlipFitGymCentreBusinessInterface {
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
+public interface FlipFitGymCentreDAOInterface {
     public FlipFitGymCentre updateGymCentre(FlipFitGymCentre FFGC);
     public void deleteGymCentre(FlipFitGymCentre FFGC);
     public boolean isGymCentreAvailable(int centreID);

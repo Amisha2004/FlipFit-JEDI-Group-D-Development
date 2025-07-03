@@ -7,9 +7,11 @@ package com.flipfit.bean;
  * 
  */
 public class FlipFitPayments {
+	private int paymentID;
 	private int userID;
 	private String paymentInfo;
-    /**
+
+	/**
 	 * @return the userID
 	 */
 	public int getUserID() {
@@ -32,6 +34,15 @@ public class FlipFitPayments {
 	 */
 	public void setPaymentInfo(String paymentInfo) {
 		this.paymentInfo = paymentInfo;
+	}
+
+	public int getPaymentID() {
+		return paymentID;
+	}
+
+
+	public void setPaymentID(int paymentID) {
+		this.paymentID = paymentID;
 	}
 
 }

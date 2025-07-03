@@ -5,7 +5,7 @@ import com.flipfit.bean.FlipFitUser;
 import java.util.List;
 
 public interface FlipFitUserDAOInterface {
-    public FlipFitUser login(String emailId, String password);
+    public FlipFitUser login(String username, String password, int roleId);
 
     public boolean register(FlipFitUser user);
 
