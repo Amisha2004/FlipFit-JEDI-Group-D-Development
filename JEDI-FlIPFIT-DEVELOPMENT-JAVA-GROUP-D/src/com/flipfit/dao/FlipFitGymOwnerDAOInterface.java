@@ -5,7 +5,6 @@ import com.flipfit.bean.FlipFitGymCentre;
 import com.flipfit.bean.FlipFitGymOwner;
 import com.flipfit.bean.FlipFitUser;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface FlipFitGymOwnerDAOInterface {
@@ -18,4 +17,6 @@ public interface FlipFitGymOwnerDAOInterface {
     public FlipFitGymOwner editDetails(FlipFitGymOwner owner);
 
     public FlipFitGymOwner addGymOwner(FlipFitGymOwner owner, FlipFitUser user);
+
+    public boolean deleteGymOwner(int gymId);
 }
