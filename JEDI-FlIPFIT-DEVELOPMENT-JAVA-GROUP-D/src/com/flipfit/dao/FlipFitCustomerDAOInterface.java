@@ -2,20 +2,20 @@ package com.flipfit.dao;
 
 import com.flipfit.bean.BookingStatus;
 import com.flipfit.bean.FlipFitBooking;
-import com.flipfit.bean.FlipFitGymCentre;
+import com.flipfit.bean.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public interface FlipFitCustomerDAOInterface {
-    public List<FlipFitBooking> viewBookedSlots(int userID);
+    public List<FlipFitSlots> viewBookedSlots(int userID);
 
     /**
      * checkBookingConflicts
      * @param userId The ID of the user.
      * @return A FlipFitBooking object
      */
-    public FlipFitBooking checkBookingConflicts(int userId);
+    public FlipFitBooking checkBookingConflicts(int userId, int slotTime);
 
     /**
      * viewCentres

@@ -29,8 +29,15 @@ public class FlipFitGymOwnerBusinessServices extends FlipFitUserBusinessServices
     public List<FlipFitCustomer> getCustomerListByGymId(int gymId){
         return flipFitGymOwnerDAOImpl.getCustomerListByGymId(gymId);
     }
-	public List<FlipFitGymCentre> viewOwnCentres(int ownerId) {
+	public List<FlipFitGymCentre> viewOwnCentres(FlipFitGymOwner owner) {
 //		List<FlipFitGymCentre> gymCentres = new ArrayList();
-		return flipFitGymOwnerDAOImpl.viewOwnCentres(ownerId);
+		return flipFitGymOwnerDAOImpl.viewOwnCentres(owner);
+    }
+
+    public FlipFitGymOwner editDetails(FlipFitGymOwner owner){
+        return flipFitGymOwnerDAOImpl.editDetails(owner);
+    }
+    public FlipFitGymOwner addGymOwner(FlipFitGymOwner owner, FlipFitUser user){
+        return flipFitGymOwnerDAOImpl.addGymOwner(owner, user);
     }
 }

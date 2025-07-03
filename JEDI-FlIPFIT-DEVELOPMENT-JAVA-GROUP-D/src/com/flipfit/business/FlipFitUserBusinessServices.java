@@ -4,8 +4,13 @@
 package com.flipfit.business;
 
 import com.flipfit.bean.*;
+import com.flipfit.constants.DBConstants;
 import com.flipfit.dao.*;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 
 /**
@@ -40,14 +45,15 @@ public class FlipFitUserBusinessServices implements FlipFitUserBusinessInterface
         return user;
     }
 
-    /**
-     * Retrieves a list of all approved gym centres.
-     *
-     * @return A list of FlipFitGymCentre objects.
-     */
-    @Override
-    public List<FlipFitGymCentre> viewCentres() {
-        System.out.println("Business Service: Fetching all approved gym centres...");
-        return null;
+    public void deleteUser(int userId){
+        flipFitUserDAOImpl.deleteUser(userId);
+    }
+
+    public FlipFitUser updateUser(FlipFitUser FFU) {
+        return flipFitUserDAOImpl.updateUser(FFU);
+    }
+
+    public FlipFitUser getUser(int userId){
+        return flipFitUserDAOImpl.getUser(userId);
     }
 }

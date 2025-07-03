@@ -14,5 +14,9 @@ import com.flipfit.bean.FlipFitUser;
 public interface FlipFitUserBusinessInterface {
 	 public boolean register(FlipFitUser flipFitUser);
 	 public FlipFitUser logIn(FlipFitUser FlipFitUser);
-	 public List<FlipFitGymCentre> viewCentres();
+	public void deleteUser(int userId);
+
+	public FlipFitUser updateUser(FlipFitUser FFU);
+
+	public FlipFitUser getUser(int userId);
 }

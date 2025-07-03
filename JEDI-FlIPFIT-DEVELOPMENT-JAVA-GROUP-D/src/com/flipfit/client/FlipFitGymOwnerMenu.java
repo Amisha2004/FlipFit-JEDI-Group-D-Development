@@ -87,14 +87,14 @@ public class FlipFitGymOwnerMenu {
 					}
 					case 4: {
 						System.out.println("View my Centres: ");
-						List<FlipFitGymCentre> gymCentres = gymOwnerBusinessServices.viewOwnCentres(gymOwner.getUserId());
-						if(gymCentres.isEmpty()) {
-							System.out.println("There are no centres to view this menu.");
-						}
-						for(FlipFitGymCentre gymCentre : gymCentres) {
-							System.out.println("Gym Centre ID: " + gymCentre.getGymID() + " Gym Name: " + gymCentre.getGymName());
-						}
-						break;
+//						List<FlipFitGymCentre> gymCentres = gymOwnerBusinessServices.viewOwnCentres(gymOwner.getUserId());
+//						if(gymCentres.isEmpty()) {
+//							System.out.println("There are no centres to view this menu.");
+//						}
+//						for(FlipFitGymCentre gymCentre : gymCentres) {
+//							System.out.println("Gym Centre ID: " + gymCentre.getGymID() + " Gym Name: " + gymCentre.getGymName());
+//						}
+//						break;
 					}
 					case 5: {
 						System.out.println("Logout");
