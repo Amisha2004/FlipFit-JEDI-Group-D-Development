@@ -7,9 +7,9 @@ import java.util.List;
 public interface FlipFitBookingDAOInterface {
     public FlipFitBooking makeBooking(FlipFitBooking booking);
 
-    public boolean deleteBooking(int bookingID);
+    public boolean deleteBooking(int bookingId, int slotId);
 
     public List<FlipFitBooking> getAllBookings(int userId);
 
-    public List<FlipFitBooking> getBookingDetailsByBookingId(int bookingId);
+    public FlipFitBooking getBookingDetailsByBookingId(int bookingId);
 }
