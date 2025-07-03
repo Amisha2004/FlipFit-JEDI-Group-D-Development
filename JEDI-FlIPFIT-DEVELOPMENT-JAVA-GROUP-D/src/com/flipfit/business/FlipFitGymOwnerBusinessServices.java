@@ -2,39 +2,35 @@
  * 
  */
 package com.flipfit.business;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.flipfit.bean.*;
-import com.flipfit.dao.FlipFitAdminDAO;
-import com.flipfit.dao.FlipFitGymOwnerDAO;
+import com.flipfit.dao.FlipFitGymOwnerDAOImpl;
+import com.flipfit.dao.FlipFitGymOwnerDAOInterface;
+import com.flipfit.dao.FlipFitUserDAOInterface;
 
 /**
  * 
  */
 public class FlipFitGymOwnerBusinessServices extends FlipFitUserBusinessServices implements FlipFitGymOwnerBusinessInterface{
-    private FlipFitGymOwnerDAO flipFitGymOwnerDAO;
+    private final FlipFitGymOwnerDAOInterface flipFitGymOwnerDAOImpl;
     public FlipFitGymOwnerBusinessServices() {
-        // THIS LINE IS THE SOLUTION. IT MUST BE PRESENT AND CORRECT.
-        this.flipFitGymOwnerDAO = new FlipFitGymOwnerDAO(); // <--- CRITICAL INITIALIZATION
-        System.out.println("DEBUG: FlipFitCustomerBusinessServices constructor called. DAO initialized."); // Add this for debugging
+        this.flipFitGymOwnerDAOImpl = new FlipFitGymOwnerDAOImpl(); // <--- CRITICAL INITIALIZATION
+        System.out.println("DEBUG: FlipFitCustomerBusinessServices constructor called. DAO initialized.");
     }
 
     public void addCentre(FlipFitGymCentre flipFitGymCentre){
-        FlipFitGymOwnerDAO.addCentre(flipFitGymCentre);
-    }
-	public void addSlot(FlipFitSlots flipFitSlot){
-       FlipFitGymOwnerDAO.addSlot(flipFitSlot);
+        flipFitGymOwnerDAOImpl.addCentre(flipFitGymCentre);
     }
 	public List<FlipFitPayments> viewPayments() {
         System.out.println("Payments listed:> ");
         return null;
     }
-    public List<FlipFitCustomer> getCustomerList(){
-        return FlipFitGymOwnerDAO.getCustomerList();
+    public List<FlipFitCustomer> getCustomerListByGymId(int gymId){
+        return flipFitGymOwnerDAOImpl.getCustomerListByGymId(gymId);
     }
 	public List<FlipFitGymCentre> viewOwnCentres(int ownerId) {
 //		List<FlipFitGymCentre> gymCentres = new ArrayList();
-		return FlipFitGymOwnerDAO.viewOwnCentres(ownerId);
+		return flipFitGymOwnerDAOImpl.viewOwnCentres(ownerId);
     }
 }

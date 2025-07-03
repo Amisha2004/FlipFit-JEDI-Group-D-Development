@@ -73,13 +73,13 @@ public class FlipFitAdminMenu {
 					}
 					case 3: {
 						System.out.println("View FlipFit Customers: ");
-						List<FlipFitCustomer> customers = adminBusinessServices.getCustomerList();
-						if(customers.isEmpty()) {
-							System.out.println("There are no customers to view this menu.");
+						List<FlipFitUser> users = adminBusinessServices.getUserList();
+						if(users.isEmpty()) {
+							System.out.println("There are no users to view this menu.");
 							break;
 						}
-						for(FlipFitCustomer customer : customers) {
-							System.out.println("Owner ID: " + customer.getUserId() + " Owner Name: " + customer.getUserName());
+						for(FlipFitUser user : users) {
+							System.out.println("Owner ID: " + user.getUserId() + " Owner Name: " + user.getUserName());
 						}
 						break;
 					}

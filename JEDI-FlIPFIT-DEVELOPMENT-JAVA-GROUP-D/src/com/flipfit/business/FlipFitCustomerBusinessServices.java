@@ -7,32 +7,33 @@ package com.flipfit.business;
 import java.util.List;
 
 import com.flipfit.bean.*;
-import com.flipfit.dao.FlipFitCustomerDAO;
+import com.flipfit.dao.FlipFitCustomerDAOImpl;
+import com.flipfit.dao.FlipFitCustomerDAOInterface;
 
 /**
  * 
  */
 public class FlipFitCustomerBusinessServices extends FlipFitUserBusinessServices implements FlipFitCustomerBusinessInterface{
-    private final FlipFitCustomerDAO flipFitCustomerDAO;
+    private final FlipFitCustomerDAOInterface flipFitCustomerDAOImpl;
     public FlipFitCustomerBusinessServices() {
-        this.flipFitCustomerDAO = new FlipFitCustomerDAO();
+        this.flipFitCustomerDAOImpl = new FlipFitCustomerDAOImpl();
     }
 
     public List<FlipFitGymCentre> viewGymCentres(){
-        return this.flipFitCustomerDAO.viewGymCentres();
+        return this.flipFitCustomerDAOImpl.viewGymCentres();
     }
     
     public List<FlipFitBooking> viewBookedSlots(int userId){
-        return this.flipFitCustomerDAO.viewBookedSlots(userId);
+        return this.flipFitCustomerDAOImpl.viewBookedSlots(userId);
     }
     
     public FlipFitBooking checkBookingConflicts(int userId) {
     	System.out.println("All Booking Conflicts checked!");
-    	return this.flipFitCustomerDAO.checkBookingConflicts(userId);
+    	return this.flipFitCustomerDAOImpl.checkBookingConflicts(userId);
     }
     public boolean makePayment(int userId) {
         System.out.println("Make payment called:> ");
-        return this.flipFitCustomerDAO.makePayment(userId);
+        return this.flipFitCustomerDAOImpl.makePayment(userId);
     }
     
 }
