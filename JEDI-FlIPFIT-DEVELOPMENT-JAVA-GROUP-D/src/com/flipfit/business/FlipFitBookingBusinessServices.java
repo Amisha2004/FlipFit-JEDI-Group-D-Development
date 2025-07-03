@@ -19,20 +19,18 @@ public class FlipFitBookingBusinessServices implements FlipFitBookingBusinessInt
         this.flipFitBookingDAOImpl = new FlipFitBookingDAOImpl();
     }
 
-    public FlipFitBooking makeBooking(int userID, int centreID, int startTime) {
-        System.out.println("Made a booking for " + centreID);
-        return null;
+    public FlipFitBooking makeBooking(FlipFitBooking flipFitBooking) {
+        return flipFitBookingDAOImpl.makeBooking(flipFitBooking);
     }
 
-    public boolean deleteBooking(int bookingId) {
-        System.out.println("Deleting a booking for " + bookingId);
-        return false;
+    public boolean deleteBooking(int bookingId, int slotId) {
+        return flipFitBookingDAOImpl.deleteBooking(bookingId, slotId);
     }
     public List<FlipFitBooking> getAllBookings(int userId){
         return flipFitBookingDAOImpl.getAllBookings(userId);
     }
 
-    public List<FlipFitBooking> getBookingDetailsByBookingId(int bookingId){
+    public FlipFitBooking getBookingDetailsByBookingId(int bookingId){
         return flipFitBookingDAOImpl.getBookingDetailsByBookingId(bookingId);
     }
 }
