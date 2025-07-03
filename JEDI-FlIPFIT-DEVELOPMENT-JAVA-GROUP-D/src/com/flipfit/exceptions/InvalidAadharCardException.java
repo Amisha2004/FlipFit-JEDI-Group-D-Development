@@ -1,7 +1,7 @@
 package com.flipfit.exceptions;
 
 
-public class InvalidAadhaarCardException extends Exception {
+public class InvalidAadharCardException extends Exception {
 
     @Override
     public String getMessage() {
