@@ -13,7 +13,7 @@ import java.sql.*;
 public class FlipFitGymOwnerDAOImpl implements FlipFitGymOwnerDAOInterface {
 
     public FlipFitGymCentre addCentre(FlipFitGymCentre centre) {
-        String sql = "INSERT INTO GymCentre (ownerID, approved, city, state, pincode) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO GymCentre (ownerId, approvalStatus, city, state, pincode) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setInt(1, centre.getOwnerID());
             stmt.setBoolean(3, centre.isApprovalStatus());
@@ -48,14 +48,14 @@ public class FlipFitGymOwnerDAOImpl implements FlipFitGymOwnerDAOInterface {
     public List<FlipFitGymCentre> viewOwnCentres(FlipFitGymOwner owner) {
         List<FlipFitGymCentre> gymcentres = new ArrayList<>();
         int userId = owner.getUserId();
-        String sql = "SELECT gymID, gymName, ownerID, city, state, pincode FROM GymCentre where ownerID=?";
+        String sql = "SELECT gymId, gymName, ownerID, city, state, pincode FROM GymCentre where ownerId=?";
         try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
             stmt.setInt(1, userId);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 FlipFitGymCentre gymcentre = new FlipFitGymCentre();
-                gymcentre.setGymID(rs.getInt("gymID"));
-                gymcentre.setOwnerID(rs.getInt("ownerID"));
+                gymcentre.setGymID(rs.getInt("gymId"));
+                gymcentre.setOwnerID(rs.getInt("ownerId"));
                 gymcentre.setCity(rs.getString("city"));
                 gymcentre.setState(rs.getString("state"));
                 gymcentre.setPincode(rs.getString("pincode"));
@@ -71,7 +71,7 @@ public class FlipFitGymOwnerDAOImpl implements FlipFitGymOwnerDAOInterface {
 
     public FlipFitGymOwner editDetails(FlipFitGymOwner owner) {
         int userId = owner.getUserId();
-        String sql = "UPDATE GymOwner SET panId=?, aadharNumber=? ,gstNumber=? WHERE userID=?";
+        String sql = "UPDATE GymOwner SET panId=?, aadharNumber=? ,gstNumber=? WHERE ownerId=?";
 
         try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
             stmt.setString(1, owner.getPanNumber());
@@ -91,7 +91,7 @@ public class FlipFitGymOwnerDAOImpl implements FlipFitGymOwnerDAOInterface {
     }
 
     public FlipFitGymOwner addGymOwner(FlipFitGymOwner owner, FlipFitUser user) {
-        String sql = "INSERT INTO GymOwner (userID ,panId, aadharNumber, gstNumber, approvalStatus) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO GymOwner (ownerId ,panId, aadharNumber, gstNumber, approvalStatus) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, user.getUserId());
             stmt.setString(2, owner.getPanNumber());

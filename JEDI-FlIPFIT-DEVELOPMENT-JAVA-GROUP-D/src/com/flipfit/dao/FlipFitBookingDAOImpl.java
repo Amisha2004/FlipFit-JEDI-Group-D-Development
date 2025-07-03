@@ -12,7 +12,7 @@ public class FlipFitBookingDAOImpl implements FlipFitBookingDAOInterface{
 
     @Override
     public FlipFitBooking makeBooking(FlipFitBooking booking){
-        String sql = "INSERT INTO Booking (bookingId, userID, slotID) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Booking (bookingId, userId, slotId) VALUES (?, ?, ?)";
         try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setInt(1, booking.getBookingId());
             stmt.setInt(2, booking.getUserId());
@@ -65,15 +65,15 @@ public class FlipFitBookingDAOImpl implements FlipFitBookingDAOInterface{
             Connection con = DriverManager.getConnection(
                     DBConstants.DB_URL, DBConstants.USER, DBConstants.PASSWORD);
 
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM Booking WHERE userID = ?");
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM Booking WHERE userId = ?");
             stmt.setInt(1, userId);
 
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                int UserId = rs.getInt("userID");
-                int slotId = rs.getInt("slotID");
-                int bookingId = rs.getInt("bookingID");
+                int UserId = rs.getInt("userId");
+                int slotId = rs.getInt("slotId");
+                int bookingId = rs.getInt("bookingId");
 
                 FlipFitBooking booking = new FlipFitBooking();
                 booking.setUserId(UserId);
@@ -101,7 +101,7 @@ public class FlipFitBookingDAOImpl implements FlipFitBookingDAOInterface{
             Connection con = DriverManager.getConnection(
                     DBConstants.DB_URL, DBConstants.USER, DBConstants.PASSWORD);
 
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM Booking WHERE id = ?");
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM Booking WHERE bookingId = ?");
             stmt.setInt(1, bookingId);
 
             ResultSet rs = stmt.executeQuery();

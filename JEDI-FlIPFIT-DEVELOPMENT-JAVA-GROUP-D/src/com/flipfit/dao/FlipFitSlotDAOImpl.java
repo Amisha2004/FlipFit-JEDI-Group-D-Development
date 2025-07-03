@@ -1,5 +1,6 @@
 package com.flipfit.dao;
 import java.sql.*;
+import java.time.LocalTime;
 import java.util.*;
 
 import com.flipfit.bean.*;
@@ -9,14 +10,14 @@ import com.flipfit.exceptions.*;
 public class FlipFitSlotDAOImpl {
 
     public FlipFitSlots addSlot(FlipFitSlots slot){
-        String sql = "INSERT INTO Slots (slotId, centreId, slotTime, seatsAvailable, maxCapacity, slotDate) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Slots (slotId, gymId, slotTime, seatsAvailable, maxCapacity, slotDate) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setInt(1, slot.getSlotId());
             stmt.setInt(2, slot.getGymId());
-            stmt.setString(3, slot.getSlotStartTime());
+            stmt.setObject(3, slot.getSlotStartTime());
             stmt.setInt(4, slot.getSeatsAvailable());
             stmt.setInt(5, slot.getMaxSeats());
-            stmt.setInt(6, slot.getSlotDate());
+            stmt.setObject(6, slot.getSlotDate());
 
             int affectedRows = stmt.executeUpdate(); // Use executeUpdate() for INSERT
             if (affectedRows == 0) {
@@ -45,10 +46,10 @@ public class FlipFitSlotDAOImpl {
             Connection con = DriverManager.getConnection(
                     DBConstants.DB_URL, DBConstants.USER, DBConstants.PASSWORD);
 
-            PreparedStatement stmt = con.prepareStatement("DELETE FROM Slots WHERE gymId = ? AND slotID = ?");
+            PreparedStatement stmt = con.prepareStatement("DELETE FROM Slots WHERE gymId = ? AND slotId = ?");
 
             stmt.setInt(1, slot.getGymId());
-            stmt.setInt(2, slot.getSlotDate());
+            stmt.setObject(2, slot.getSlotDate());
 
             int i = stmt.executeUpdate();
             System.out.println(i + " slot deleted");
@@ -65,14 +66,14 @@ public class FlipFitSlotDAOImpl {
     }
 
     public boolean updateSlot(FlipFitSlots slot){
-        String sql = "UPDATE Slots SET gymID = ?, slotTime = ?, seatsAvailable = ?, maxCapacity = ?, slotDate = ? WHERE slotID = ?";
+        String sql = "UPDATE Slots SET gymId = ?, slotTime = ?, seatsAvailable = ?, maxCapacity = ?, slotDate = ? WHERE slotId = ?";
         try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, slot.getGymId());
-            stmt.setString(2, slot.getSlotStartTime());
+            stmt.setObject(2, slot.getSlotStartTime());
             stmt.setInt(3, slot.getSeatsAvailable());
             stmt.setInt(4, slot.getMaxSeats());
-            stmt.setInt(5, slot.getSlotDate());
+            stmt.setObject(5, slot.getSlotDate());
 
 
             int affectedRows = stmt.executeUpdate(); // Use executeUpdate() for INSERT
@@ -99,8 +100,8 @@ public class FlipFitSlotDAOImpl {
 
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                int slotID = rs.getInt("slotID");
-                String StartTime = rs.getString("slotTime");
+                int slotID = rs.getInt("slotId");
+                Time StartTime = rs.getObject("slotTime", Time.class);;
                 int SeatsAvailable = rs.getInt("seatsAvailable");
 
                 FlipFitSlots slot = new FlipFitSlots();
@@ -122,16 +123,16 @@ public class FlipFitSlotDAOImpl {
     }
 
     public FlipFitSlots getSlotById(int slotId){
-        String sql = "SELECT * FROM Slots WHERE slotID=?";
+        String sql = "SELECT * FROM Slots WHERE slotId=?";
         try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, slotId);
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    int slotid = rs.getInt("slotID");
+                    int slotid = rs.getInt("slotId");
                     int seatsAvailable = rs.getInt("seatsAvailable");
-                    String slotTime = rs.getString("slotTime");
-                    int centreID = rs.getInt("centreID");
+                    Time slotTime = rs.getObject("slotTime", Time.class);
+                    int centreID = rs.getInt("centreId");
                     FlipFitSlots slot = new FlipFitSlots();
                     slot.setSlotId(slotid);
                     slot.setSlotStartTime(slotTime);
@@ -149,15 +150,15 @@ public class FlipFitSlotDAOImpl {
         return null;
     }
 
-    public FlipFitSlots getSlotDetails(String startTime, int centreId){
-        String sql = "SELECT * FROM Slots WHERE slotTime = ? AND gymID = ?";
+    public FlipFitSlots getSlotDetails(Time startTime, int centreId){
+        String sql = "SELECT * FROM Slots WHERE slotTime = ? AND gymId = ?";
         try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, startTime);
+            stmt.setObject(1, startTime);
             stmt.setInt(2, centreId);
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    int slotid = rs.getInt("slotID");
+                    int slotid = rs.getInt("slotId");
                     int seatsAvailable = rs.getInt("seatsAvailable");
 
                     FlipFitSlots slot = new FlipFitSlots();

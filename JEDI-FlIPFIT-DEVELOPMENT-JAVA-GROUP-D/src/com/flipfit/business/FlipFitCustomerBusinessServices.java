@@ -4,6 +4,8 @@
 package com.flipfit.business;
 
 //import java.util.ArrayList;
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.List;
 
 import com.flipfit.bean.*;
@@ -27,13 +29,16 @@ public class FlipFitCustomerBusinessServices extends FlipFitUserBusinessServices
         return this.flipFitCustomerDAOImpl.viewBookedSlots(userId);
     }
     
-    public FlipFitBooking checkBookingConflicts(int userId, int slotTime) {
+    public FlipFitBooking checkBookingConflicts(int userId, Time slotTime) {
     	System.out.println("All Booking Conflicts checked!");
     	return this.flipFitCustomerDAOImpl.checkBookingConflicts(userId, slotTime);
     }
-    public boolean makePayment(int userId) {
+    public boolean makePayment(int userId, String paymentInfo) {
         System.out.println("Make payment called:> ");
-        return this.flipFitCustomerDAOImpl.makePayment(userId);
+        return this.flipFitCustomerDAOImpl.makePayment(userId, paymentInfo);
     }
-    
+
+    public List<FlipFitPayments> viewPaymentDetails(int userID){
+        return this.flipFitCustomerDAOImpl.viewPaymentDetails(userID);
+    }
 }

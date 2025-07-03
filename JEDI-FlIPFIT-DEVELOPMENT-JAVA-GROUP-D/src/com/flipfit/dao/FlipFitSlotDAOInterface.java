@@ -2,6 +2,8 @@ package com.flipfit.dao;
 
 import com.flipfit.bean.FlipFitSlots;
 
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.List;
 
 public interface FlipFitSlotDAOInterface {
@@ -15,5 +17,5 @@ public interface FlipFitSlotDAOInterface {
 
     public FlipFitSlots getSlotById(int slotId);
 
-    public FlipFitSlots getSlotDetails(int startTime, int centreId);
+    public FlipFitSlots getSlotDetails(Time startTime, int centreId);
 }
