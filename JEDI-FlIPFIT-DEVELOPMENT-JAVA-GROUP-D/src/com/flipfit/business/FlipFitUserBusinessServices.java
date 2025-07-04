@@ -22,6 +22,7 @@ public class FlipFitUserBusinessServices implements FlipFitUserBusinessInterface
 
     @Override
     public FlipFitUser register(FlipFitUser flipFitUser) {
+        System.out.println("Business Service: Attempting to register user with DAO...");
         return flipFitUserDAOImpl.register(flipFitUser);
     }
 
