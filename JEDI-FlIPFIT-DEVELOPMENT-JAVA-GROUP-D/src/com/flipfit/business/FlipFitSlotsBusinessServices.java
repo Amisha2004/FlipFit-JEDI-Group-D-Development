@@ -16,7 +16,7 @@ public class FlipFitSlotsBusinessServices implements FlipFitSlotsBusinessInterfa
     private final FlipFitSlotDAOImpl flipFitSlotDAOImpl;
     public FlipFitSlotsBusinessServices() {
         this.flipFitSlotDAOImpl = new FlipFitSlotDAOImpl(); // <--- CRITICAL INITIALIZATION
-        System.out.println("DEBUG: FlipFitCustomerBusinessServices constructor called. DAO initialized.");
+//        System.out.println("DEBUG: FlipFitCustomerBusinessServices constructor called. DAO initialized.");
     }
 
     public FlipFitSlots addSlot(FlipFitSlots slot){

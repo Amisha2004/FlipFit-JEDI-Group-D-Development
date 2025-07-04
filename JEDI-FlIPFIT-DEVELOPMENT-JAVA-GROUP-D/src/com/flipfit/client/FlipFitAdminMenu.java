@@ -44,10 +44,13 @@ public class FlipFitAdminMenu {
 							System.out.println("There are no pending gym owner to view this menu.");
 							break;
 						}
+						System.out.println(ColorConstants.CYAN + "--------------------------------------" + ColorConstants.RESET);
+						System.out.printf(ColorConstants.CYAN + "%-10s %-25s%n", "Owner ID", "Owner Name" + ColorConstants.RESET);
+						System.out.println(ColorConstants.CYAN + "--------------------------------------" + ColorConstants.RESET);
 						for(FlipFitGymOwner pendingGymOwner : pendingGymOwners) {
-							System.out.println(ColorConstants.PURPLE + "Owner ID: " + pendingGymOwner.getUserId() + " Owner Name: " + pendingGymOwner.getUserName() + ColorConstants.RESET);
-
+							System.out.printf(ColorConstants.PURPLE + "%-10s %-25s%n", pendingGymOwner.getUserId(), pendingGymOwner.getUserName() + ColorConstants.RESET);
 						}
+
 						System.out.println(ColorConstants.YELLOW + "Do you want to approve any Gym Owner? (Y/N): " + ColorConstants.RESET);
 						if(in.next().equalsIgnoreCase("N")) break;
 						System.out.println(ColorConstants.YELLOW + "Enter Gym Owner ID you want to approve: " + ColorConstants.RESET);
@@ -64,8 +67,13 @@ public class FlipFitAdminMenu {
 							System.out.println("There are no approved gym owner to view this menu.");
 							break;
 						}
+						// --- ADD THE TABLE HEADING HERE ---
+						System.out.println(ColorConstants.CYAN + "--------------------------------------" + ColorConstants.RESET);
+						System.out.printf(ColorConstants.CYAN + "%-10s %-25s%n", "Owner ID", "Owner Name" + ColorConstants.RESET);
+						System.out.println(ColorConstants.CYAN + "--------------------------------------" + ColorConstants.RESET);
+						// --- END TABLE HEADING ---
 						for(FlipFitGymOwner approvedGymOwner : approvedGymOwners) {
-							System.out.println(ColorConstants.PURPLE + "Owner ID: " + approvedGymOwner.getUserId() + " Owner Name: " + approvedGymOwner.getUserName() + ColorConstants.RESET);
+							System.out.printf(ColorConstants.PURPLE +  "%-10s %-25s%n", approvedGymOwner.getUserId(), approvedGymOwner.getUserName() + ColorConstants.RESET);
 						}
 						System.out.println(ColorConstants.YELLOW + "Do you want to delete any Gym Owner? (Y/N): " + ColorConstants.RESET);
 						if(in.next().equalsIgnoreCase("N")) break;
@@ -83,8 +91,13 @@ public class FlipFitAdminMenu {
 							System.out.println("There are no users to view this menu.");
 							break;
 						}
+						// --- ADD THE TABLE HEADING HERE ---
+						System.out.println(ColorConstants.CYAN + "--------------------------------------" + ColorConstants.RESET);
+						System.out.printf(ColorConstants.CYAN + "%-10s %-25s%n", "Owner ID", "Owner Name" + ColorConstants.RESET);
+						System.out.println(ColorConstants.CYAN + "--------------------------------------" + ColorConstants.RESET);
+						// --- END TABLE HEADING ---
 						for(FlipFitUser user : users) {
-							System.out.println(ColorConstants.PURPLE + "Owner ID: " + user.getUserId() + " Owner Name: " + user.getUserName()+ ColorConstants.RESET);
+							System.out.printf(ColorConstants.PURPLE +  "%-10s %-25s%n" , user.getUserId(), user.getUserName() + ColorConstants.RESET);
 						}
 						break;
 					}
@@ -103,7 +116,7 @@ public class FlipFitAdminMenu {
 							System.out.println(ColorConstants.CYAN + "--------------------------------------" + ColorConstants.RESET);
                             // --- END TABLE HEADING ---
 							for(FlipFitGymCentre  gymCentre : gymCentres ){
-								System.out.println(ColorConstants.PURPLE + gymCentre.getGymID() + " " + gymCentre.getGymName()+ ColorConstants.RESET);
+								System.out.printf(ColorConstants.PURPLE + "%-10s %-25s%n", gymCentre.getGymID() ,gymCentre.getGymName()+ ColorConstants.RESET);
 							}
 						}
 						break;

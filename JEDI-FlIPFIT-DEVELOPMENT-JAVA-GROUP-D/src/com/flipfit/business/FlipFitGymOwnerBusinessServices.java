@@ -15,7 +15,7 @@ public class FlipFitGymOwnerBusinessServices extends FlipFitUserBusinessServices
     private final FlipFitGymOwnerDAOInterface flipFitGymOwnerDAOImpl;
     public FlipFitGymOwnerBusinessServices() {
         this.flipFitGymOwnerDAOImpl = new FlipFitGymOwnerDAOImpl(); // <--- CRITICAL INITIALIZATION
-        System.out.println("DEBUG: FlipFitCustomerBusinessServices constructor called. DAO initialized.");
+//        System.out.println("DEBUG: FlipFitCustomerBusinessServices constructor called. DAO initialized.");
     }
 
     public void addCentre(FlipFitGymCentre flipFitGymCentre){

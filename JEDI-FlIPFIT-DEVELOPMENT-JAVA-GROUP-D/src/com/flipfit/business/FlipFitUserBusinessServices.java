@@ -4,6 +4,7 @@
 package com.flipfit.business;
 
 import com.flipfit.bean.*;
+import com.flipfit.constants.ColorConstants;
 import com.flipfit.dao.*;
 
 /**
@@ -14,26 +15,22 @@ public class FlipFitUserBusinessServices implements FlipFitUserBusinessInterface
     private final FlipFitUserDAOInterface flipFitUserDAOImpl;
     public FlipFitUserBusinessServices() {
         this.flipFitUserDAOImpl = new FlipFitUserDAOImpl(); // <--- CRITICAL INITIALIZATION
-        System.out.println("DEBUG: FlipFitCustomerBusinessServices constructor called. DAO initialized.");
+//        System.out.println("DEBUG: FlipFitCustomerBusinessServices constructor called. DAO initialized.");
     }
 
 
 
     @Override
     public FlipFitUser register(FlipFitUser flipFitUser) {
-
-        // Pass the fully-formed object to the DAO to handle the database insertion.
-        System.out.println("Business Service: Attempting to register user with DAO...");
         return flipFitUserDAOImpl.register(flipFitUser);
     }
 
     public FlipFitUser logIn(FlipFitUser FlipFitUser) {
-        System.out.println("Business Service: Verifying credentials via DAO...");
         FlipFitUser user = flipFitUserDAOImpl.login(FlipFitUser.getUserName(), FlipFitUser.getPassword(),  FlipFitUser.getRole());
         if (user != null) {
-            System.out.println("Business Service: Login successful for " + user.getUserName());
+            System.out.println(ColorConstants.GREEN + "Business Service: Login successful for " + user.getUserName() + ColorConstants.RESET);
         } else {
-            System.out.println("Business Service: Login failed.");
+            System.out.println(ColorConstants.RED + "Business Service: Login failed." + ColorConstants.RESET);
         }
         return user;
     }
