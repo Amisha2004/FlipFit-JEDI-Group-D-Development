@@ -10,7 +10,9 @@ import com.flipfit.constants.ColorConstants;
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
@@ -29,8 +31,14 @@ public class FlipFitGymOwnerMenu {
 			FlipFitGymOwnerBusinessServices gymOwnerBusinessServices = new FlipFitGymOwnerBusinessServices();
 			FlipFitSlotsBusinessServices flipFitSlotsBusinessServices = new FlipFitSlotsBusinessServices();
 			int choice = 0;
+			LocalDateTime now = LocalDateTime.now();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+			String formattedDateTime = now.format(formatter);
+
 			while(true){
 				System.out.println(ColorConstants.CYAN + "==========Gym Owner Menu==========" + ColorConstants.RESET);
+				// Print the date/time and admin name
+				System.out.println(ColorConstants.BLUE + String.format("%-30s %30s", formattedDateTime, gymOwner.getUserName()) + ColorConstants.RESET);
 				System.out.println(ColorConstants.YELLOW + """
 						Choose your choice:
 						1 -> Add Gym Centre
@@ -119,7 +127,7 @@ public class FlipFitGymOwnerMenu {
 							break;
 						}
 						for(FlipFitUser customer : customers) {
-							System.out.println(ColorConstants.PURPLE + "Owner ID: " + customer.getUserId() + " Owner Name: " + customer.getUserName()+ ColorConstants.RESET);
+							System.out.println(ColorConstants.PURPLE + "Customer ID: " + customer.getUserId() + " Customer Name: " + customer.getUserName()+ ColorConstants.RESET);
 						}
 						break;
 					}

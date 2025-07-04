@@ -7,6 +7,7 @@ import java.util.List;
 import com.flipfit.bean.*;
 import com.flipfit.dao.FlipFitGymOwnerDAOImpl;
 import com.flipfit.dao.FlipFitGymOwnerDAOInterface;
+import com.flipfit.exceptions.GymCentreNotFoundException;
 
 /**
  * 
@@ -29,7 +30,6 @@ public class FlipFitGymOwnerBusinessServices extends FlipFitUserBusinessServices
         return flipFitGymOwnerDAOImpl.getCustomerListByGymId(gymId);
     }
 	public List<FlipFitGymCentre> viewOwnCentres(int userId) {
-//		List<FlipFitGymCentre> gymCentres = new ArrayList();
 		return flipFitGymOwnerDAOImpl.viewOwnCentres(userId);
     }
 
@@ -40,6 +40,14 @@ public class FlipFitGymOwnerBusinessServices extends FlipFitUserBusinessServices
         return flipFitGymOwnerDAOImpl.addGymOwner(owner, user);
     }
     public boolean deleteGymCentre(int gymId){
-        return flipFitGymOwnerDAOImpl.deleteGymOwner(gymId);
+        try{
+            if(!flipFitGymOwnerDAOImpl.deleteGymOwner(gymId)){
+                throw new GymCentreNotFoundException();
+            }
+            return flipFitGymOwnerDAOImpl.deleteGymOwner(gymId);
+        } catch (GymCentreNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
     }
 }

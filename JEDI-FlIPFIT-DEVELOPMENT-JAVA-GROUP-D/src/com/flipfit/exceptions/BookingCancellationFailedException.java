@@ -13,7 +13,6 @@ public class BookingCancellationFailedException extends Exception {
     private String message = "Booking cancellation failed";
     public BookingCancellationFailedException() {}
     public BookingCancellationFailedException(String message) {
-
         this.message = message;
     }
     /**

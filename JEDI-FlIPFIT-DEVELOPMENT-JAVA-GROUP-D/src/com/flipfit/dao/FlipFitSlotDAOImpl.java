@@ -34,8 +34,8 @@ public class FlipFitSlotDAOImpl {
             }
         } catch (SlotInsertionFailedException e) {
             System.out.println(e.getMessage());
-        } catch (Exception e) {
-            System.out.println("Error adding slot: " + e);
+        } catch (SQLException e) {
+            System.out.println("Error adding slot: " + e.getMessage());
         }
         return slot;
     }
@@ -59,8 +59,8 @@ public class FlipFitSlotDAOImpl {
 
             return i > 0;
 
-        } catch (Exception e) {
-            System.out.println("Error deleting slot: " + e);
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println("Error deleting slot: " + e.getMessage());
         }
         return false;
     }
@@ -81,7 +81,7 @@ public class FlipFitSlotDAOImpl {
                 throw new UpdationFailedException("Updating slots failed");
             }
         } catch (SQLException | UpdationFailedException e) {
-            System.out.println("Error updating slot: " + e);
+            System.out.println("Error updating slot: " + e.getMessage());
             return false;
         }
         return true;

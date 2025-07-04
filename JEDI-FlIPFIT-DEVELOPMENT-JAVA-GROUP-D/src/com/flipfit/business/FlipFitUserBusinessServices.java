@@ -6,6 +6,9 @@ package com.flipfit.business;
 import com.flipfit.bean.*;
 import com.flipfit.constants.ColorConstants;
 import com.flipfit.dao.*;
+import com.flipfit.exceptions.InvalidLoginException;
+import com.flipfit.exceptions.RegistrationFailedException;
+import com.flipfit.exceptions.UserNotFoundException;
 
 /**
  * Implements the business logic for general user functionalities like
@@ -22,18 +25,28 @@ public class FlipFitUserBusinessServices implements FlipFitUserBusinessInterface
 
     @Override
     public FlipFitUser register(FlipFitUser flipFitUser) {
-        System.out.println("Business Service: Attempting to register user with DAO...");
-        return flipFitUserDAOImpl.register(flipFitUser);
+        try{
+            if(flipFitUserDAOImpl.register(flipFitUser) == null){
+                throw new RegistrationFailedException();
+            }
+            return flipFitUserDAOImpl.register(flipFitUser);
+        } catch (RegistrationFailedException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 
     public FlipFitUser logIn(FlipFitUser FlipFitUser) {
-        FlipFitUser user = flipFitUserDAOImpl.login(FlipFitUser.getUserName(), FlipFitUser.getPassword(),  FlipFitUser.getRole());
-        if (user != null) {
-            System.out.println(ColorConstants.GREEN + "Business Service: Login successful for " + user.getUserName() + ColorConstants.RESET);
-        } else {
-            System.out.println(ColorConstants.RED + "Business Service: Login failed." + ColorConstants.RESET);
+        try {
+            FlipFitUser user = flipFitUserDAOImpl.login(FlipFitUser.getUserName(), FlipFitUser.getPassword(), FlipFitUser.getRole());
+            if (user == null) {
+                throw new InvalidLoginException();
+            }
+            return user;
+        } catch (InvalidLoginException e) {
+            System.out.println(e.getMessage());
         }
-        return user;
+        return null;
     }
 
     public void deleteUser(int userId){
@@ -41,10 +54,26 @@ public class FlipFitUserBusinessServices implements FlipFitUserBusinessInterface
     }
 
     public FlipFitUser updateUser(FlipFitUser FFU) {
-        return flipFitUserDAOImpl.updateUser(FFU);
+        try{
+            if(flipFitUserDAOImpl.updateUser(FFU) == null){
+                throw new UserNotFoundException();
+            }
+            return flipFitUserDAOImpl.updateUser(FFU);
+        } catch (UserNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 
     public FlipFitUser getUser(int userId){
-        return flipFitUserDAOImpl.getUser(userId);
+        try{
+            if(flipFitUserDAOImpl.getUser(userId) == null){
+                throw new UserNotFoundException();
+            }
+            return flipFitUserDAOImpl.getUser(userId);
+        } catch (UserNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 }

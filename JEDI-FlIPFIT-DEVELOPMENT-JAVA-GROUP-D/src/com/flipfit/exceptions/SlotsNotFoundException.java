@@ -2,10 +2,14 @@ package com.flipfit.exceptions;
 
 import com.flipfit.constants.ColorConstants;
 
-public class UserNotFoundException extends Exception {
-    private String message = "User Not found";
-    public UserNotFoundException() {}
-    public UserNotFoundException(String message) {
+import static com.flipfit.constants.ColorConstants.*;
+
+
+public class SlotsNotFoundException extends Exception {
+
+    private String message = "Slot Not Found!";
+    public SlotsNotFoundException() {}
+    public SlotsNotFoundException(String message) {
         this.message = message;
     }
     /**

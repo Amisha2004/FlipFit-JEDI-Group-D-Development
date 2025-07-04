@@ -41,9 +41,44 @@ public class FlipFitGymOwnerDAOImpl implements FlipFitGymOwnerDAOInterface {
         return centre;
     }
 
-    public List<FlipFitCustomer> getCustomerListByGymId(int gymId) {
-        System.out.println("Here is the customer list");
-        return null;
+    public List<FlipFitCustomer> getCustomerListByGymId(int ownerId) {
+        List<FlipFitCustomer> customerList = new ArrayList<>();
+
+        String sql = "SELECT DISTINCT U.userId, U.userName, U.emailId, U.phoneNumber " +
+                "FROM User U " +
+                "JOIN Booking B ON U.userId = B.userId " +
+                "JOIN Slots S ON B.slotId = S.slotId " +
+                "JOIN GymCentre GC ON S.gymId = GC.gymId " +
+                "WHERE GC.ownerId = ?"; // Filter by the gym owner's user ID
+
+        // Use try-with-resources to ensure Connection, PreparedStatement, and ResultSet are closed automatically
+        try (Connection conn = GetConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, ownerId); // Set the gymId parameter
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                // Populate the list of FlipFitCustomer objects
+                while (rs.next()) {
+                    int userId = rs.getInt("userId");
+                    String name = rs.getString("userName");
+                    String email = rs.getString("emailId");
+                    String phone = rs.getString("phoneNumber");
+
+                    FlipFitCustomer customer = new FlipFitCustomer();
+                    customer.setUserId(userId);
+                    customer.setUserName(name);
+                    customer.setEmailID(email);
+                    customer.setPhoneNumber(phone);
+                    customerList.add(customer);
+                }
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Database error while fetching customer list for gymId " + ownerId + ": " + e.getMessage());
+        }
+        // No need for a finally block as try-with-resources handles closing resources
+        return customerList;
     }
 
     public List<FlipFitGymCentre> viewOwnCentres(int userId) {

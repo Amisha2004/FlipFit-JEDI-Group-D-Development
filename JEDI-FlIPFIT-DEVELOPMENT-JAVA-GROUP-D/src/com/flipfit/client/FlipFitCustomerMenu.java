@@ -10,8 +10,11 @@ import com.flipfit.dao.FlipFitBookingDAOImpl;
 import com.flipfit.dao.FlipFitCustomerDAOImpl;
 import com.flipfit.dao.FlipFitGymCentreDAOImpl;
 import com.flipfit.dao.FlipFitSlotDAOImpl;
+import com.flipfit.exceptions.BookingCancellationFailedException;
+import com.flipfit.exceptions.BookingDetailsNotFoundException;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
@@ -29,12 +32,15 @@ public class FlipFitCustomerMenu {
 	public static void getFlipFitCustomerMenu(FlipFitUser customer) {
 		int userId = customer.getUserId();
 		int choice;
+		LocalDateTime now = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+		String formattedDateTime = now.format(formatter);
 
 		do {
+
+			System.out.println(ColorConstants.CYAN + " ==============Admin Menu================" + ColorConstants.RESET);
+			System.out.println(ColorConstants.BLUE + String.format("%-10s %10s", formattedDateTime, customer.getUserName()) + ColorConstants.RESET);
 			System.out.println(ColorConstants.YELLOW + """
-			=================================
-				FlipFit Customer Menu    
-			=================================
 			1. Book a Slot
 			2. View My Bookings
 			3. Cancel a Booking
@@ -86,12 +92,10 @@ public class FlipFitCustomerMenu {
 		int centreId = sc.nextInt();
 		sc.nextLine();
 
-		FlipFitGymCentre centre = null;
-		for(int i = 0; i < centreList.size(); i++) {
-			if(centreList.get(i).getGymID() == centreId) {
-				centre =  centreList.get(i);
-			}
-		}
+		FlipFitGymCentre centre = centreList.stream()
+				.filter(c -> c.getGymID() == centreId)
+				.findFirst()
+				.orElse(null);
 
 		if(centre == null) {
 			System.out.println("Please enter a valid Gym Centre ID.");
@@ -186,12 +190,16 @@ public class FlipFitCustomerMenu {
 		// We need the slotId to increment availability.
 		// First, get the booking details.
 		FlipFitBooking bookingToCancel = bookingBusiness.getBookingDetailsByBookingId(bookingId);
-		if (bookingToCancel == null || bookingToCancel.getUserId() != userId) {
-			System.out.println("Invalid Booking ID.");
+		try{
+			if (bookingToCancel == null || bookingToCancel.getUserId() != userId)
+                throw new BookingDetailsNotFoundException();
+		} catch (BookingDetailsNotFoundException e) {
+			System.out.println(e.getMessage());
 			return;
-		}
+        }
 
-		boolean isCancelled = bookingBusiness.deleteBooking(bookingId, bookingToCancel.getSlotId());
+
+        boolean isCancelled = bookingBusiness.deleteBooking(bookingId, bookingToCancel.getSlotId());
 		if (isCancelled) {
 			System.out.println("Booking ID " + bookingId + " has been successfully cancelled.");
 		} else {

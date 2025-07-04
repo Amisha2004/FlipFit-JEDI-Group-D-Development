@@ -24,7 +24,7 @@ public class FlipFitBookingDAOImpl implements FlipFitBookingDAOInterface{
                 int rowsAffected = updateStmt.executeUpdate();
                 if (rowsAffected == 0) {
                     // This means the slot was already full or didn't exist. Fail the transaction.
-                    throw new SlotBookingFailedException("Booking failed: The selected slot is no longer available.");
+                    throw new SQLException("Update slot failed");
                 }
             }
 
@@ -38,7 +38,7 @@ public class FlipFitBookingDAOImpl implements FlipFitBookingDAOInterface{
 
                 int affectedRows = stmt.executeUpdate();
                 if (affectedRows == 0) {
-                    throw new SlotBookingFailedException("Creating booking failed, no rows affected.");
+                    throw new SQLException("Creating booking failed, no rows affected.");
                 }
 
                 // Retrieve the auto-generated bookingId
@@ -47,7 +47,7 @@ public class FlipFitBookingDAOImpl implements FlipFitBookingDAOInterface{
                         int bookingID = generatedKeys.getInt(1);
                         booking.setBookingId(bookingID); // Set the new ID back into the object
                     } else {
-                        throw new SlotBookingFailedException("Creating booking failed, no ID obtained.");
+                        throw new SQLException("Creating booking failed, no ID obtained.");
                     }
                 }
             }

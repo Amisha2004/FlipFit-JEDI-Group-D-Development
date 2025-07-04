@@ -47,8 +47,8 @@ public class FlipFitPaymentsDAOImpl implements FlipFitPaymentsDAOInterface {
             System.out.println( i + " payment info deleted");
 
             con.close();
-        } catch(Exception e){
-            System.out.println(e);
+        } catch(SQLException | ClassNotFoundException e){
+            System.out.println(e.getMessage());
         }
     }
 }

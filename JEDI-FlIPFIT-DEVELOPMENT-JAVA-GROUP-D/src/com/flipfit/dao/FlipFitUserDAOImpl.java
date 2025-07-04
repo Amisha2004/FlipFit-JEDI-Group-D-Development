@@ -74,13 +74,15 @@ public class FlipFitUserDAOImpl implements FlipFitUserDAOInterface {
             }
             else{
                 con.close();
-                throw new RegistrationFailedException("User registration affected 0 rows.");
+                throw new SQLException("User registration affected 0 rows.");
             }
-        } catch (Exception e)
+        } catch (SQLException e)
         {
             System.err.println("Error during user registration: " + e.getMessage());
             e.printStackTrace();
             return null;
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -114,7 +116,7 @@ public class FlipFitUserDAOImpl implements FlipFitUserDAOInterface {
             }
         } catch (UpdationFailedException e) {
             System.out.println(e.getMessage());
-        } catch (Exception e) {
+        } catch (SQLException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
         return null;
@@ -146,8 +148,10 @@ public class FlipFitUserDAOImpl implements FlipFitUserDAOInterface {
             System.out.println(i + " user fetched");
 
             con.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
         return FFU;
     }

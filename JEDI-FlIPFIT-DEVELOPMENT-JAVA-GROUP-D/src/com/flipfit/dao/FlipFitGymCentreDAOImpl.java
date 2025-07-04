@@ -40,7 +40,7 @@ public class FlipFitGymCentreDAOImpl implements FlipFitGymCentreDAOInterface{
         } catch (UpdationFailedException e) {
             System.out.println(e.getMessage());
         }
-        catch(Exception e){
+        catch(SQLException | ClassNotFoundException e){
             System.out.println(e.getMessage());
         }
         return FFGC;
@@ -64,8 +64,8 @@ public class FlipFitGymCentreDAOImpl implements FlipFitGymCentreDAOInterface{
             System.out.println( i + " centre deleted");
 
             con.close();
-        } catch(Exception e){
-            System.out.println(e);
+        } catch(SQLException | ClassNotFoundException e){
+            System.out.println(e.getMessage());
         }
     };
 
@@ -88,8 +88,8 @@ public class FlipFitGymCentreDAOImpl implements FlipFitGymCentreDAOInterface{
             con.close();
             return res;
 
-        } catch(Exception e){
-            System.out.println(e);
+        } catch(SQLException | ClassNotFoundException e){
+            System.out.println(e.getMessage());
         }
         return false;
     };
@@ -126,8 +126,8 @@ public class FlipFitGymCentreDAOImpl implements FlipFitGymCentreDAOInterface{
 
 
             con.close();
-        } catch(Exception e){
-            System.out.println(e);
+        } catch(SQLException | ClassNotFoundException e){
+            System.out.println(e.getMessage());
         }
         return ffarray;
     }
@@ -162,8 +162,8 @@ public class FlipFitGymCentreDAOImpl implements FlipFitGymCentreDAOInterface{
 
 
             con.close();
-        } catch(Exception e){
-            System.out.println(e);
+        } catch(SQLException | ClassNotFoundException e){
+            System.out.println(e.getMessage());
         }
         return ffarray;
     };

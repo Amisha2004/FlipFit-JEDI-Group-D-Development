@@ -8,6 +8,8 @@ import com.flipfit.business.FlipFitAdminBusinessServices;
 import com.flipfit.constants.ColorConstants;
 
 import java.sql.SQLOutput;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /**
@@ -22,11 +24,19 @@ public class FlipFitAdminMenu {
 		// TODO Auto-generated method stud
 
 		try{
+
 			Scanner in = new Scanner(System.in);
 			FlipFitAdminBusinessServices adminBusinessServices = new FlipFitAdminBusinessServices();
+
 			int choice = 0;
+
+			LocalDateTime now = LocalDateTime.now();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+			String formattedDateTime = now.format(formatter);
+
 			while(true){
 				System.out.println(ColorConstants.CYAN + "==========Admin Menu==========" + ColorConstants.CYAN);
+				System.out.println(ColorConstants.BLUE + String.format("%-10s %10s", formattedDateTime, admin.getUserName()) + ColorConstants.RESET);
 				System.out.println(ColorConstants.YELLOW + """
 						Choose your choice:
 						1 -> View Pending Gym Owner requests
@@ -93,7 +103,7 @@ public class FlipFitAdminMenu {
 						}
 						// --- ADD THE TABLE HEADING HERE ---
 						System.out.println(ColorConstants.CYAN + "--------------------------------------" + ColorConstants.RESET);
-						System.out.printf(ColorConstants.CYAN + "%-10s %-25s%n", "Owner ID", "Owner Name" + ColorConstants.RESET);
+						System.out.printf(ColorConstants.CYAN + "%-10s %-25s%n", "Customer ID", "Customer Name" + ColorConstants.RESET);
 						System.out.println(ColorConstants.CYAN + "--------------------------------------" + ColorConstants.RESET);
 						// --- END TABLE HEADING ---
 						for(FlipFitUser user : users) {
