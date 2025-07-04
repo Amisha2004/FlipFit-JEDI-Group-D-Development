@@ -70,7 +70,7 @@ public class FlipFitMainApplicationMenu{
 								admin.setRole(role);
 								FlipFitAdminBusinessServices flipFitAdminBusinessServices = new FlipFitAdminBusinessServices();
 								FlipFitUser user = flipFitAdminBusinessServices.logIn(admin);
-								if (user != null) FlipFitAdminMenu.getFlipFitAdminMenu(admin);
+								if (user != null) FlipFitAdminMenu.getFlipFitAdminMenu(user);
 								break;
 
 							}
@@ -81,29 +81,17 @@ public class FlipFitMainApplicationMenu{
 								gymOwner.setRole(role);
 								FlipFitGymOwnerBusinessServices flipFitGymOwnerBusinessServices = new FlipFitGymOwnerBusinessServices();
 								FlipFitUser user = flipFitGymOwnerBusinessServices.logIn(gymOwner);
-								if (user != null) FlipFitGymOwnerMenu.getFlipFitGymOwnerMenu(gymOwner);
-								break;
-							}
-							case 3: {
-								FlipFitCustomer gymCustomer = new FlipFitCustomer();
-								gymCustomer.setUserName(username);
-								gymCustomer.setPassword(password);
-								gymCustomer.setRole(role);
-								FlipFitCustomerBusinessServices flipFitCustomerBusinessServices = new FlipFitCustomerBusinessServices();
-								FlipFitUser user = flipFitCustomerBusinessServices.logIn(gymCustomer);
-								if (user != null) FlipFitCustomerMenu.getFlipFitCustomerMenu(gymCustomer);
+								if (user != null) FlipFitGymOwnerMenu.getFlipFitGymOwnerMenu(user);
 								break;
 							}
 							case 3: {
 								FlipFitCustomer gymCustomer = new FlipFitCustomer();
 								gymCustomer.setUserName(userName);
 								gymCustomer.setPassword(password);
-								FlipFitCustomerBusinessServices customerBusinessServices = new FlipFitCustomerBusinessServices();
-								gymCustomer = (FlipFitCustomer) customerBusinessServices.logIn(gymCustomer);
-								if (gymCustomer == null){
-									throw new InvalidLoginException();
-								}
-								FlipFitCustomerMenu.getFlipFitCustomerMenu(gymCustomer);
+								gymCustomer.setRole(role);
+								FlipFitCustomerBusinessServices flipFitCustomerBusinessServices = new FlipFitCustomerBusinessServices();
+								FlipFitUser user = flipFitCustomerBusinessServices.logIn(gymCustomer);
+								if (user != null) FlipFitCustomerMenu.getFlipFitCustomerMenu(user);
 								break;
 							}
 						}
@@ -147,8 +135,8 @@ public class FlipFitMainApplicationMenu{
 
 						FlipFitGymOwnerBusinessServices flipFitGymOwnerBusinessServices = new FlipFitGymOwnerBusinessServices();
 						FlipFitUser newUser = flipFitGymOwnerBusinessServices.register(user);
-						if(newUser!=null && flipFitGymOwnerBusinessServices.addGymOwner(gymOwner, user)!=null){
-							System.out.println(ColorConstants.GREEN + gymOwner.getUserName() + " is successfully registered as a FlipFit Gym Owner!" + ColorConstants.RESET);
+						if(newUser!=null && flipFitGymOwnerBusinessServices.addGymOwner(gymOwner, newUser)!=null){
+							System.out.println(ColorConstants.GREEN + newUser.getUserName() + " is successfully registered as a FlipFit Gym Owner!" + ColorConstants.RESET);
 							System.out.println(ColorConstants.GREEN + "You can Login now" + ColorConstants.RESET);
 						}
 						else{

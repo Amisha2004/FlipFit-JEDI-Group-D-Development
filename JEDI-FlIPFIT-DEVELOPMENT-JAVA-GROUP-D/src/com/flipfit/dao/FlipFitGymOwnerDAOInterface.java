@@ -12,7 +12,7 @@ public interface FlipFitGymOwnerDAOInterface {
 
     public List<FlipFitCustomer> getCustomerListByGymId(int gymId);
 
-    public List<FlipFitGymCentre> viewOwnCentres(FlipFitGymOwner owner);
+    public List<FlipFitGymCentre> viewOwnCentres(int userId);
 
     public FlipFitGymOwner editDetails(FlipFitGymOwner owner);
 

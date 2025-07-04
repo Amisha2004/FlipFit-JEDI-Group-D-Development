@@ -44,37 +44,44 @@ public class FlipFitUserDAOImpl implements FlipFitUserDAOInterface {
             Connection con = DriverManager.getConnection(
                     DBConstants.DB_URL, DBConstants.USER, DBConstants.PASSWORD);
 
-            PreparedStatement stmt = con.prepareStatement("INSERT INTO User VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement stmt = con.prepareStatement(
+                    "INSERT INTO User (userName, password, emailId, phoneNumber, city, pinCode, roleId) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                    Statement.RETURN_GENERATED_KEYS // This flag tells JDBC to make generated keys available
+            );
 
 
-            // Generate random integers in range 0 to 999
-            FFU.setUserId(rand.nextInt(1000));
-            stmt.setInt(1, FFU.getUserId());
-            stmt.setString(2, FFU.getUserName());
-            stmt.setString(3, FFU.getPassword());
-            stmt.setString(4, FFU.getEmailID());
-            stmt.setString(5, FFU.getPhoneNumber());
-            stmt.setString(6, FFU.getCity());
-            stmt.setString(7, FFU.getPinCode());
-            stmt.setInt(8, FFU.getRole());
-
-
+            stmt.setString(1, FFU.getUserName());
+            stmt.setString(2, FFU.getPassword());
+            stmt.setString(3, FFU.getEmailID());
+            stmt.setString(4, FFU.getPhoneNumber());
+            stmt.setString(5, FFU.getCity());
+            stmt.setString(6, FFU.getPinCode());
+            stmt.setInt(7, FFU.getRole());
 
             int i = stmt.executeUpdate();
             if (i > 0) {
-                System.out.println(i + " user added");
+                try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        FFU.setUserId(generatedKeys.getInt(1)); // Get the first (and usually only) generated key
+                    } else {
+                        System.err.println("Warning: User inserted, but failed to retrieve auto-generated userId.");
+                    }
+                }
+
+                System.out.println(i + " user added, ID: " + FFU.getUserId());
                 con.close();
                 return FFU;
             }
             else{
                 con.close();
-                throw new RegistrationFailedException();
+                throw new RegistrationFailedException("User registration affected 0 rows.");
             }
         } catch (Exception e)
         {
-            System.out.println(e.getMessage());
+            System.err.println("Error during user registration: " + e.getMessage());
+            e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
     public void deleteUser(int userId){

@@ -18,7 +18,7 @@ public class FlipFitAdminMenu {
 	/**
 	 * @param admin
 	 */
-	public static void getFlipFitAdminMenu(FlipFitAdmin admin) {
+	public static void getFlipFitAdminMenu(FlipFitUser admin) {
 		// TODO Auto-generated method stud
 
 		try{
@@ -49,7 +49,7 @@ public class FlipFitAdminMenu {
 
 						}
 						System.out.println(ColorConstants.YELLOW + "Do you want to approve any Gym Owner? (Y/N): " + ColorConstants.RESET);
-						if(in.nextLine().equalsIgnoreCase("N")) break;
+						if(in.next().equalsIgnoreCase("N")) break;
 						System.out.println(ColorConstants.YELLOW + "Enter Gym Owner ID you want to approve: " + ColorConstants.RESET);
 						int ownerId = in.nextInt();
 						boolean validate = adminBusinessServices.validateOwner(ownerId);
@@ -68,7 +68,7 @@ public class FlipFitAdminMenu {
 							System.out.println(ColorConstants.PURPLE + "Owner ID: " + approvedGymOwner.getUserId() + " Owner Name: " + approvedGymOwner.getUserName() + ColorConstants.RESET);
 						}
 						System.out.println(ColorConstants.YELLOW + "Do you want to delete any Gym Owner? (Y/N): " + ColorConstants.RESET);
-						if(in.nextLine().equalsIgnoreCase("N")) break;
+						if(in.next().equalsIgnoreCase("N")) break;
 						System.out.println(ColorConstants.YELLOW + "Enter Gym Owner ID you want to delete: " + ColorConstants.RESET);
 						int ownerId = in.nextInt();
 						boolean delete = adminBusinessServices.deleteOwner(ownerId);
@@ -97,6 +97,11 @@ public class FlipFitAdminMenu {
 							System.out.println("There are no gym centre to view this menu.");
 						}
 						else{
+							// --- ADD THE TABLE HEADING HERE ---
+							System.out.println(ColorConstants.CYAN + "--------------------------------------" + ColorConstants.RESET);
+							System.out.printf(ColorConstants.CYAN + "%-10s %-25s%n", "Gym ID", "Gym Name" + ColorConstants.RESET);
+							System.out.println(ColorConstants.CYAN + "--------------------------------------" + ColorConstants.RESET);
+                            // --- END TABLE HEADING ---
 							for(FlipFitGymCentre  gymCentre : gymCentres ){
 								System.out.println(ColorConstants.PURPLE + gymCentre.getGymID() + " " + gymCentre.getGymName()+ ColorConstants.RESET);
 							}

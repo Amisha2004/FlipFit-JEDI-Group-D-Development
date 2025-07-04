@@ -34,6 +34,9 @@ public class FlipFitCustomerBusinessServices extends FlipFitUserBusinessServices
     	return this.flipFitCustomerDAOImpl.checkBookingConflicts(userId, slotTime);
     }
     public boolean makePayment(int userId, String paymentInfo) {
+        if(paymentInfo=="abort"){
+            return false;
+        }
         System.out.println("Make payment called:> ");
         return this.flipFitCustomerDAOImpl.makePayment(userId, paymentInfo);
     }

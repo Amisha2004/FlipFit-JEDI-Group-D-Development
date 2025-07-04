@@ -16,6 +16,7 @@ public class FlipFitCustomerDAOImpl implements FlipFitCustomerDAOInterface{
         List<FlipFitSlots> bookedSlots = new ArrayList<>();
         String sql = "SELECT * FROM Booking WHERE userId = ?";
         try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
+            System.out.println("Executing query: ");
             stmt.setInt(1, userID);
             ResultSet rs = stmt.executeQuery();
 
@@ -39,7 +40,7 @@ public class FlipFitCustomerDAOImpl implements FlipFitCustomerDAOInterface{
     public FlipFitBooking checkBookingConflicts(int userId, Time slotTime) {
         String sql = "SELECT b.* FROM Booking b " +
                 "JOIN Slots s ON b.slotId = s.slotId " +
-                "WHERE b.userId = ? AND s.slotTime = ?)";
+                "WHERE b.userId = ? AND s.slotTime = ?"; // <-- HERE IS THE EXTRA ')'
 
         try (Connection conn = GetConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -63,8 +64,9 @@ public class FlipFitCustomerDAOImpl implements FlipFitCustomerDAOInterface{
             }
         } catch (SQLException e) {
             // It's good practice to log the exception
-            System.err.println("SQL Error while checking for booking conflicts: " + e.getMessage());
+//            System.err.println("SQL Error while checking for booking conflicts: " + e.getMessage());
             e.printStackTrace();
+            throw new RuntimeException("SQL Error while checking for booking conflicts: " + e.getMessage());
         }
 
         // If we reach this point, no conflicting booking was found.
@@ -115,7 +117,7 @@ public class FlipFitCustomerDAOImpl implements FlipFitCustomerDAOInterface{
             // --- Query 1: Insert a new record into the Customer table ---
             // WARNING: This assumes your Customer table allows multiple rows for the same userID.
             // If userID is a PRIMARY KEY, this will fail on the second payment for the same user.
-            String insertCustomerSql = "INSERT INTO Customer (userId, paymentInfo) VALUES (?, ?)";
+            String insertCustomerSql = "INSERT INTO GymCustomer (userId, paymentInfo) VALUES (?, ?)";
             try (PreparedStatement insertCustomerStmt = conn.prepareStatement(insertCustomerSql)) {
                 insertCustomerStmt.setInt(1, userID);
                 insertCustomerStmt.setString(2, paymentInfo);
@@ -179,7 +181,6 @@ public class FlipFitCustomerDAOImpl implements FlipFitCustomerDAOInterface{
 
         try (Connection conn = GetConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-
             // Set the userID parameter in the query.
             stmt.setInt(1, userID);
 

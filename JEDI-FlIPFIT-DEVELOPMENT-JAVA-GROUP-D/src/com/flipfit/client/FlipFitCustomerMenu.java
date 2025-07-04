@@ -5,6 +5,7 @@ package com.flipfit.client;
 
 import com.flipfit.bean.*;
 import com.flipfit.business.*;
+import com.flipfit.constants.ColorConstants;
 import com.flipfit.dao.FlipFitBookingDAOImpl;
 import com.flipfit.dao.FlipFitCustomerDAOImpl;
 import com.flipfit.dao.FlipFitGymCentreDAOImpl;
@@ -25,20 +26,21 @@ public class FlipFitCustomerMenu {
 	private static final FlipFitSlotsBusinessInterface slotsBusiness = new FlipFitSlotsBusinessServices();
 	private static final Scanner sc = new Scanner(System.in);
 
-	public static void getFlipFitCustomerMenu(FlipFitCustomer customer) {
+	public static void getFlipFitCustomerMenu(FlipFitUser customer) {
 		int userId = customer.getUserId();
 		int choice;
 
 		do {
-			System.out.println("\n=================================");
-			System.out.println("    FlipFit Customer Menu    ");
-			System.out.println("=================================");
-			System.out.println("1. Book a Slot");
-			System.out.println("2. View My Bookings");
-			System.out.println("3. Cancel a Booking");
-			System.out.println("4. View My Payment History");
-			System.out.println("5. Logout");
-			System.out.print("Enter your choice: ");
+			System.out.println(ColorConstants.YELLOW + """
+			=================================
+				FlipFit Customer Menu    
+			=================================
+			1. Book a Slot
+			2. View My Bookings
+			3. Cancel a Booking
+			4. View My Payment History
+			5. Logout
+			Enter your choice: """ + ColorConstants.RESET);
 
 			choice = sc.nextInt();
 			sc.nextLine(); // Consume the newline character
@@ -151,7 +153,7 @@ public class FlipFitCustomerMenu {
 		} else {
 			System.out.println("Payment failed. Your booking has been cancelled. Please try again.");
 			// In a real app, you'd have more robust logic to handle payment failure.
-			bookingBusiness.deleteBooking(userId, slotId); // Rollback the booking
+			bookingBusiness.deleteBooking(bookingMade.getBookingId(), slotId); // Rollback the booking
 		}
 	}
 

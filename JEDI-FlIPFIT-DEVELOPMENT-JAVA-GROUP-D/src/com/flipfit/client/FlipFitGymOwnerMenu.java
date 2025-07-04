@@ -7,7 +7,9 @@ import com.flipfit.bean.*;
 import com.flipfit.business.*;
 import com.flipfit.constants.ColorConstants;
 
+import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Scanner;
@@ -85,6 +87,9 @@ public class FlipFitGymOwnerMenu {
 						flipFitSlots.setSlotStartTime(sqlTime);
 						flipFitSlots.setMaxSeats(maxCapacity);
 						flipFitSlots.setSeatsAvailable(maxCapacity);
+						LocalDate today = LocalDate.now(); // Gets the current date (e.g., 2025-07-04)
+						Date sqlDate = Date.valueOf(today); // Converts LocalDate to java.sql.Date
+						flipFitSlots.setSlotDate(sqlDate);
 						flipFitSlots = flipFitSlotsBusinessServices.addSlot(flipFitSlots);
 						if(flipFitSlots==null) System.out.println(ColorConstants.RED + "Gym Slot not added, try again." + ColorConstants.RESET);
 						System.out.println(ColorConstants.GREEN + "Gym Slot Added." + ColorConstants.RESET);
@@ -120,7 +125,7 @@ public class FlipFitGymOwnerMenu {
 					}
 					case 5: {
 						System.out.println(ColorConstants.CYAN + "========View my Centres========" + ColorConstants.RESET);
-						List<FlipFitGymCentre> gymCentres = gymOwnerBusinessServices.viewOwnCentres((FlipFitGymOwner) gymOwner);
+						List<FlipFitGymCentre> gymCentres = gymOwnerBusinessServices.viewOwnCentres(gymOwner.getUserId());
 						if(gymCentres.isEmpty()) {
 							System.out.println("There are no centres to view this menu.");
 						}

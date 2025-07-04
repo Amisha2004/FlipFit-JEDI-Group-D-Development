@@ -10,14 +10,14 @@ import com.flipfit.exceptions.*;
 public class FlipFitSlotDAOImpl {
 
     public FlipFitSlots addSlot(FlipFitSlots slot){
-        String sql = "INSERT INTO Slots (slotId, gymId, slotTime, seatsAvailable, maxCapacity, slotDate) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Slots (gymId, slotTime, seatsAvailable, maxCapacity, slotDate) VALUES ( ?, ?, ?, ?, ?)";
         try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            stmt.setInt(1, slot.getSlotId());
-            stmt.setInt(2, slot.getGymId());
-            stmt.setObject(3, slot.getSlotStartTime());
-            stmt.setInt(4, slot.getSeatsAvailable());
-            stmt.setInt(5, slot.getMaxSeats());
-            stmt.setObject(6, slot.getSlotDate());
+
+            stmt.setInt(1, slot.getGymId());
+            stmt.setObject(2, slot.getSlotStartTime());
+            stmt.setInt(3, slot.getSeatsAvailable());
+            stmt.setInt(4, slot.getMaxSeats());
+            stmt.setObject(5, slot.getSlotDate());
 
             int affectedRows = stmt.executeUpdate(); // Use executeUpdate() for INSERT
             if (affectedRows == 0) {
@@ -49,7 +49,7 @@ public class FlipFitSlotDAOImpl {
             PreparedStatement stmt = con.prepareStatement("DELETE FROM Slots WHERE gymId = ? AND slotId = ?");
 
             stmt.setInt(1, slot.getGymId());
-            stmt.setObject(2, slot.getSlotDate());
+            stmt.setObject(2, slot.getSlotId());
 
             int i = stmt.executeUpdate();
             System.out.println(i + " slot deleted");
