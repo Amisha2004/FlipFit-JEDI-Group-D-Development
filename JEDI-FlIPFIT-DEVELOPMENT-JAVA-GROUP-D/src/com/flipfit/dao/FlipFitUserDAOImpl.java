@@ -79,7 +79,6 @@ public class FlipFitUserDAOImpl implements FlipFitUserDAOInterface {
         } catch (SQLException e)
         {
             System.err.println("Error during user registration: " + e.getMessage());
-            e.printStackTrace();
             return null;
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);

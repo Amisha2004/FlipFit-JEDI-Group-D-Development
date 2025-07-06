@@ -35,29 +35,30 @@ public class FlipFitBookingBusinessServices implements FlipFitBookingBusinessInt
     }
 
     public boolean deleteBooking(int bookingId, int slotId) {
-       try{
-           if(!flipFitBookingDAOImpl.deleteBooking(bookingId, slotId)){
-               throw new BookingCancellationFailedException();
-           }
-           return flipFitBookingDAOImpl.deleteBooking(bookingId, slotId);
-       }
-        catch(BookingCancellationFailedException e){
-           System.out.println(e.getMessage());
+        try {
+            boolean isDeleted = flipFitBookingDAOImpl.deleteBooking(bookingId, slotId);
+            if (!isDeleted) {
+                throw new BookingCancellationFailedException();
+            }
+            return true;
+        } catch (BookingCancellationFailedException e) {
+            System.out.println(e.getMessage());
         }
-       return false;
+        return false;
     }
+
     public List<FlipFitBooking> getAllBookings(int userId){
         return flipFitBookingDAOImpl.getAllBookings(userId);
     }
 
     public FlipFitBooking getBookingDetailsByBookingId(int bookingId){
         try {
-            if (flipFitBookingDAOImpl.getBookingDetailsByBookingId(bookingId) == null) {
+            FlipFitBooking booking = flipFitBookingDAOImpl.getBookingDetailsByBookingId(bookingId);
+            if (booking == null) {
                 throw new BookingDetailsNotFoundException();
             }
-            return flipFitBookingDAOImpl.getBookingDetailsByBookingId(bookingId);
-        }
-        catch (BookingDetailsNotFoundException e){
+            return booking;
+        } catch (BookingDetailsNotFoundException e){
             System.out.println(e.getMessage());
         }
         return null;

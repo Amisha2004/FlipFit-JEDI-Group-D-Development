@@ -22,41 +22,48 @@ public class FlipFitSlotsBusinessServices implements FlipFitSlotsBusinessInterfa
     }
 
     public FlipFitSlots addSlot(FlipFitSlots slot){
-        try{
-            if(this.flipFitSlotDAOImpl.addSlot(slot)==null){
-                throw new SlotBookingFailedException();
-            }
-            return this.flipFitSlotDAOImpl.addSlot(slot);
-        }
-        catch(SlotBookingFailedException e){
-            System.out.println(e.getMessage());
-        }
-        return null;
+        return this.flipFitSlotDAOImpl.addSlot(slot);
     }
 
     public boolean deleteSlot(FlipFitSlots slot){
         try {
-            if(!this.flipFitSlotDAOImpl.deleteSlot(slot)){
+            // Call the DAO method ONLY ONCE and store the result
+            boolean isDeleted = this.flipFitSlotDAOImpl.deleteSlot(slot);
+
+            // Check the result to decide whether to throw an exception or return
+            if (!isDeleted) {
+                // If the DAO returned false, it means the slot was not found/deleted
+                // So, throw the custom exception
                 throw new SlotsNotFoundException();
             }
-            return this.flipFitSlotDAOImpl.deleteSlot(slot);
+
+            // If no exception was thrown, it means isDeleted must be true,
+            // so return true to indicate success
+            return true;
+
         } catch (SlotsNotFoundException e) {
+            // Catch the specific exception and print its message
             System.out.println(e.getMessage());
+            // Return false because the deletion failed (slot not found)
+            return false;
         }
-        return false;
+        // No need for a return false outside the try-catch if catch block handles the final return
     }
 
     public boolean updateSlot(FlipFitSlots slot) {
-
         try {
-            if(!this.flipFitSlotDAOImpl.updateSlot(slot)){
+            boolean isUpdated = this.flipFitSlotDAOImpl.updateSlot(slot);
+
+            if (!isUpdated) {
                 throw new SlotsNotFoundException();
             }
-            return this.flipFitSlotDAOImpl.updateSlot(slot);
+
+            return true;
+
         } catch (SlotsNotFoundException e) {
             System.out.println(e.getMessage());
+            return false;
         }
-        return false;
     }
 
     public List<FlipFitSlots> getAllSlots(int centreId){
@@ -64,15 +71,7 @@ public class FlipFitSlotsBusinessServices implements FlipFitSlotsBusinessInterfa
     }
 
     public FlipFitSlots getSlotById(int slotId){
-        try {
-            if(this.flipFitSlotDAOImpl.getSlotById(slotId)==null){
-                throw new SlotsNotFoundException();
-            }
-            return this.flipFitSlotDAOImpl.getSlotById(slotId);
-        } catch (SlotsNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-        return null;
+        return this.flipFitSlotDAOImpl.getSlotById(slotId);
     }
 
     public FlipFitSlots getSlotDetails(Time startTime, int centreId){

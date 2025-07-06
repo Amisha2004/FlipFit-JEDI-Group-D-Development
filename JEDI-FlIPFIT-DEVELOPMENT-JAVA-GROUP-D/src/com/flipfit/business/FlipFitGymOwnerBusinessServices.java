@@ -40,14 +40,6 @@ public class FlipFitGymOwnerBusinessServices extends FlipFitUserBusinessServices
         return flipFitGymOwnerDAOImpl.addGymOwner(owner, user);
     }
     public boolean deleteGymCentre(int gymId){
-        try{
-            if(!flipFitGymOwnerDAOImpl.deleteGymOwner(gymId)){
-                throw new GymCentreNotFoundException();
-            }
-            return flipFitGymOwnerDAOImpl.deleteGymOwner(gymId);
-        } catch (GymCentreNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-        return false;
+        return flipFitGymOwnerDAOImpl.deleteGymOwner(gymId);
     }
 }

@@ -145,7 +145,33 @@ public class FlipFitGymOwnerDAOImpl implements FlipFitGymOwnerDAOInterface {
         return owner;
     }
 
-    public boolean deleteGymOwner(int gymId) {
-        return true;
+    public boolean deleteGymOwner(int gymId) { // Renamed parameter for clarity
+        // SQL query to delete a gym owner record based on their userId
+        String sql = "DELETE FROM GymCentre WHERE gymId = ?";
+
+        try (Connection conn = GetConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            // Set the userId parameter in the prepared statement
+            stmt.setInt(1, gymId);
+
+            // Execute the delete operation
+            int affectedRows = stmt.executeUpdate();
+
+            // Check if any rows were affected (meaning the deletion was successful)
+            if (affectedRows > 0) {
+                System.out.println("Gym Center with gym ID " + gymId + " successfully deleted.");
+                return true;
+            } else {
+                System.out.println("No Gym Center found with Gym ID " + gymId + " or deletion failed.");
+                return false;
+            }
+
+        } catch (SQLException e) {
+            // Print the SQL exception message for debugging
+            System.err.println("Error deleting Gym Center with Gym ID " + gymId + ": " + e.getMessage());
+            // Optionally, log the exception for more detailed error tracking
+            return false;
+        }
     }
 }

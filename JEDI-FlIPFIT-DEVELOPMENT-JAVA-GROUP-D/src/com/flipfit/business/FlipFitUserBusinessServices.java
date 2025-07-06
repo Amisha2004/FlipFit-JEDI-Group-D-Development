@@ -25,15 +25,7 @@ public class FlipFitUserBusinessServices implements FlipFitUserBusinessInterface
 
     @Override
     public FlipFitUser register(FlipFitUser flipFitUser) {
-        try{
-            if(flipFitUserDAOImpl.register(flipFitUser) == null){
-                throw new RegistrationFailedException();
-            }
-            return flipFitUserDAOImpl.register(flipFitUser);
-        } catch (RegistrationFailedException e) {
-            System.out.println(e.getMessage());
-        }
-        return null;
+            return this.flipFitUserDAOImpl.register(flipFitUser);
     }
 
     public FlipFitUser logIn(FlipFitUser FlipFitUser) {
@@ -54,23 +46,25 @@ public class FlipFitUserBusinessServices implements FlipFitUserBusinessInterface
     }
 
     public FlipFitUser updateUser(FlipFitUser FFU) {
-        try{
-            if(flipFitUserDAOImpl.updateUser(FFU) == null){
+        try {
+            FlipFitUser updatedUser = flipFitUserDAOImpl.updateUser(FFU);
+            if (updatedUser == null) {
                 throw new UserNotFoundException();
             }
-            return flipFitUserDAOImpl.updateUser(FFU);
+            return updatedUser;
         } catch (UserNotFoundException e) {
             System.out.println(e.getMessage());
         }
         return null;
     }
 
-    public FlipFitUser getUser(int userId){
-        try{
-            if(flipFitUserDAOImpl.getUser(userId) == null){
+    public FlipFitUser getUser(int userId) {
+        try {
+            FlipFitUser user = flipFitUserDAOImpl.getUser(userId);
+            if (user == null) {
                 throw new UserNotFoundException();
             }
-            return flipFitUserDAOImpl.getUser(userId);
+            return user;
         } catch (UserNotFoundException e) {
             System.out.println(e.getMessage());
         }
