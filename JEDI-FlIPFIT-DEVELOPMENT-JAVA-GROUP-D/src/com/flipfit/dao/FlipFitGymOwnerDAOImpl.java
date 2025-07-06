@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Random;
 import java.sql.*;
 
+/**
+ * Provides DAO implementations for GymOwner-related database operations.
+ */
 @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
 public class FlipFitGymOwnerDAOImpl implements FlipFitGymOwnerDAOInterface {
     /**

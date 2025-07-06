@@ -4,7 +4,7 @@
 package com.flipfit.bean;
 
 /**
- * 
+ * Define FlipFit roles
  */
 public class FlipFitRole {
 	private int roleId;

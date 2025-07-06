@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /**
- *
+ * Provides the interactive command-line menu for FlipFit admin functionalities.
  */
 public class FlipFitAdminMenu {
 

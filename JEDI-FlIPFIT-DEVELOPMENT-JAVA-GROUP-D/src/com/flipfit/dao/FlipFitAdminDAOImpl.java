@@ -6,6 +6,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Provides DAO implementations for admin-related database operations.
+ */
 public class FlipFitAdminDAOImpl implements FlipFitAdminDAOInterface {
 
     /**

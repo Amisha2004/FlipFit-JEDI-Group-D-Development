@@ -7,6 +7,9 @@ import com.flipfit.bean.*;
 import com.flipfit.constants.DBConstants;
 import com.flipfit.exceptions.*;
 
+/**
+ * Provides DAO implementations for slots-related database operations.
+ */
 public class FlipFitSlotDAOImpl {
 
     /**

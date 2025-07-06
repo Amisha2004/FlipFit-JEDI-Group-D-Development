@@ -15,13 +15,10 @@ import com.flipfit.exceptions.InvalidLoginException;
 import java.util.*;
 
 /**
- *
+ * The main entry point for the FlipFit application, handling initial login and registration.
  */
 public class FlipFitMainApplicationMenu{
 
-	/**
-	 * @param
-	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 

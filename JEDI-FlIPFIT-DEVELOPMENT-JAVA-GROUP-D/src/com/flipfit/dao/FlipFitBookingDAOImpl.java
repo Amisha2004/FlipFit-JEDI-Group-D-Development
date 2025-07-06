@@ -8,6 +8,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Provides DAO implementations for Booking-related database operations.
+ */
 public class FlipFitBookingDAOImpl implements FlipFitBookingDAOInterface{
     /**
      * makeBooking

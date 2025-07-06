@@ -1,5 +1,7 @@
 package com.flipfit.constants;
-
+/**
+ * Stores constant values for database connection parameters.
+ */
 public class DBConstants {
     public static final String USER="root";
     public static final String PASSWORD = "Amisha@2004";

@@ -4,7 +4,9 @@
 package com.flipfit.bean;
 
 /**
- * 
+ *
+ *  Define FlipFit User
+ *
  */
 public class FlipFitUser {
 	private int userId;

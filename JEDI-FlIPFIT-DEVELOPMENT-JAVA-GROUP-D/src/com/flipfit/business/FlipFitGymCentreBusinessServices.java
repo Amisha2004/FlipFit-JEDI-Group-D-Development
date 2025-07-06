@@ -13,7 +13,7 @@ import com.flipfit.dao.FlipFitCustomerDAOImpl;
 import com.flipfit.dao.*;
 
 /**
- * 
+ * Implements the business logic for managing FlipFit gym centers
  */
 public class FlipFitGymCentreBusinessServices implements FlipFitGymCentreBusinessInterface{
     private final FlipFitGymCentreDAOInterface flipFitGymCentreDAOImpl;

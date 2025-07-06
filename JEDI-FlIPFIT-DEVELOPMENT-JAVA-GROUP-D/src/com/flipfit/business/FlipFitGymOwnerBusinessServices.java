@@ -10,7 +10,7 @@ import com.flipfit.dao.FlipFitGymOwnerDAOInterface;
 import com.flipfit.exceptions.GymCentreNotFoundException;
 
 /**
- * 
+ * Implements the business logic for managing FlipFit gym owner specific operations.
  */
 public class FlipFitGymOwnerBusinessServices extends FlipFitUserBusinessServices implements FlipFitGymOwnerBusinessInterface{
     private final FlipFitGymOwnerDAOInterface flipFitGymOwnerDAOImpl;

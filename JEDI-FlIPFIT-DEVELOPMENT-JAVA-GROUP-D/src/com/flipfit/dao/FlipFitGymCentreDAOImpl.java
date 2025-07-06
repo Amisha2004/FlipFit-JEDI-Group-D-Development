@@ -7,6 +7,9 @@ import com.flipfit.constants.DBConstants;
 import com.flipfit.bean.FlipFitSlots;
 import com.flipfit.exceptions.UpdationFailedException;
 
+/**
+ * Provides DAO implementations for GymCentre-related database operations.
+ */
 public class FlipFitGymCentreDAOImpl implements FlipFitGymCentreDAOInterface{
     Random rand = new Random();
     /**

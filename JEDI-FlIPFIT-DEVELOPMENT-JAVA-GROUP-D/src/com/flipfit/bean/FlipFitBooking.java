@@ -5,7 +5,7 @@ package com.flipfit.bean;
 
 // sravya first comnmit
 /**
- * 
+ * Defines FlipFit Booking
  */
 public class FlipFitBooking {
 	private int bookingId;

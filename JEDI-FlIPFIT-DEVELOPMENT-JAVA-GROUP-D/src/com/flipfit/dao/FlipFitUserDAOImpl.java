@@ -7,6 +7,9 @@ import com.flipfit.exceptions.UpdationFailedException;
 import java.sql.*;
 import java.util.Random;
 
+/**
+ * Provides DAO implementations for user-related database operations.
+ */
 public class FlipFitUserDAOImpl implements FlipFitUserDAOInterface {
     Random rand = new Random();
 

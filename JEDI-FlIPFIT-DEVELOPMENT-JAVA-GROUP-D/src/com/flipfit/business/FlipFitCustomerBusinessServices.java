@@ -13,7 +13,7 @@ import com.flipfit.dao.FlipFitCustomerDAOImpl;
 import com.flipfit.dao.FlipFitCustomerDAOInterface;
 
 /**
- * 
+ * Implements the business logic for managing FlipFit customer specific operations.
  */
 public class FlipFitCustomerBusinessServices extends FlipFitUserBusinessServices implements FlipFitCustomerBusinessInterface{
     private final FlipFitCustomerDAOInterface flipFitCustomerDAOImpl;

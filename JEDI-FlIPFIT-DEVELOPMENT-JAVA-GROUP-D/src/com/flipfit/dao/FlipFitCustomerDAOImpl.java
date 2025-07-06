@@ -6,6 +6,9 @@ import java.time.LocalTime;
 import java.util.*;
 import java.sql.*;
 
+/**
+ * Provides DAO implementations for customer-related database operations.
+ */
 public class FlipFitCustomerDAOImpl implements FlipFitCustomerDAOInterface{
     /**
      * viewBookedSlots

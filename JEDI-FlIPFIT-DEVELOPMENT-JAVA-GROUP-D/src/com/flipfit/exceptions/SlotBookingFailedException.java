@@ -12,13 +12,6 @@ import static com.flipfit.constants.ColorConstants.*;
  */
 public class SlotBookingFailedException extends Exception {
 
-    /**
-     * Overrides the getMessage() method from the Exception class to provide
-     * a custom error message when the slot booking fails.
-     *
-     * @return String Custom error message with color formatting.
-
-     */
     private String message = "Unable to book slot. Please try again";
     public SlotBookingFailedException() {}
     public SlotBookingFailedException(String message) {

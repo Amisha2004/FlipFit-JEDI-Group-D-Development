@@ -7,6 +7,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+/**
+ * Provides DAO implementations for payments-related database operations.
+ */
 public class FlipFitPaymentsDAOImpl implements FlipFitPaymentsDAOInterface {
     /**
      * setPaymentInfo

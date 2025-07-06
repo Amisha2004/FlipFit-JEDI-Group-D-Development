@@ -6,7 +6,7 @@ package com.flipfit.bean;
 import java.util.List;
 
 /**
- * 
+ * Defines Flipfit Customer
  */
 public class FlipFitCustomer extends FlipFitUser{
 

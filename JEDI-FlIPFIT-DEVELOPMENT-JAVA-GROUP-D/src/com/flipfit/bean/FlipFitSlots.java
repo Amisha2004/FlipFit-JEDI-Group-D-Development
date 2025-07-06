@@ -5,6 +5,9 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * Define FlipFit Slots
+ */
 public class FlipFitSlots {
 	private int slotId;
 	private int gymId;

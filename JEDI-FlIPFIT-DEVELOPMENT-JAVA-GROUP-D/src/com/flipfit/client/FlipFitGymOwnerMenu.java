@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * 
+ * Provides the interactive command-line menu for Gym Owner functionalities.
  */
 public class FlipFitGymOwnerMenu {
 

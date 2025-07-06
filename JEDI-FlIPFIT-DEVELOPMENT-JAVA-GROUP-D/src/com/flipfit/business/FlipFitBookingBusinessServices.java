@@ -13,7 +13,7 @@ import com.flipfit.exceptions.SlotsNotFoundException;
 import java.util.List;
 
 /**
- * 
+ * Implements the business logic for managing FlipFit booking operations.
  */
 public class FlipFitBookingBusinessServices implements FlipFitBookingBusinessInterface{
     private final FlipFitBookingDAOInterface flipFitBookingDAOImpl;

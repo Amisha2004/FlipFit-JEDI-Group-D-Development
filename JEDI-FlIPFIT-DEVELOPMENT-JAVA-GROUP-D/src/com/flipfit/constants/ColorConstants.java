@@ -1,6 +1,7 @@
 package com.flipfit.constants;
-
-
+/**
+ * Provides ANSI escape codes for coloring terminal output.
+ */
 public class ColorConstants {
     public static String RED = "\u001B[31m";
     public static String GREEN = "\u001B[32m";

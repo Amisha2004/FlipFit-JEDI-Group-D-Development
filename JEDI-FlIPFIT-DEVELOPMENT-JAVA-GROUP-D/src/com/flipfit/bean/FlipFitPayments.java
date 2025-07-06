@@ -4,7 +4,7 @@
 package com.flipfit.bean;
 
 /**
- * 
+ * Define FlipFit Payments
  */
 public class FlipFitPayments {
 	private int paymentID;

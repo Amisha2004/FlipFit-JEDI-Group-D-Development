@@ -12,7 +12,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 /**
- * 
+ * Implements the business logic for managing FlipFit gym slots.
  */
 public class FlipFitSlotsBusinessServices implements FlipFitSlotsBusinessInterface{
     private final FlipFitSlotDAOImpl flipFitSlotDAOImpl;

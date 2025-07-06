@@ -6,7 +6,7 @@ package com.flipfit.bean;
 import java.util.List;
 
 /**
- * 
+ * Defines FlipFit Customer
  */
 public class FlipFitGymCentre {
 	private int gymID;

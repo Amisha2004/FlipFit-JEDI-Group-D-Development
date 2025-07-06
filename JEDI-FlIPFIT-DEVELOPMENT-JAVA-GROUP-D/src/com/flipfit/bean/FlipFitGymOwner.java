@@ -5,7 +5,7 @@ package com.flipfit.bean;
 
 import java.util.List;
 /**
- * 
+ * Defines FlipFit Gym owner
  */
 public class FlipFitGymOwner extends FlipFitUser {
 	public String gstNumber;

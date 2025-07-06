@@ -10,7 +10,7 @@ import com.flipfit.dao.FlipFitAdminDAOInterface;
 import java.util.*;
 
 /**
- * 
+ * Implements the business logic for managing FlipFit admin specific operations.
  */
 public class FlipFitAdminBusinessServices extends FlipFitUserBusinessServices implements FlipFitAdminBusinessInterface{
     private final FlipFitAdminDAOInterface flipFitAdminDAOImpl;
