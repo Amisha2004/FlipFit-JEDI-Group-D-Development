@@ -11,7 +11,12 @@ import java.sql.*;
 
 @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
 public class FlipFitGymOwnerDAOImpl implements FlipFitGymOwnerDAOInterface {
-
+    /**
+     * addCentre
+     * @param centre
+     * @return
+     */
+    @Override
     public FlipFitGymCentre addCentre(FlipFitGymCentre centre) {
         String sql = "INSERT INTO GymCentre (gymName, ownerId, approvalStatus, city, state, pincode) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -40,7 +45,11 @@ public class FlipFitGymOwnerDAOImpl implements FlipFitGymOwnerDAOInterface {
         }
         return centre;
     }
-
+    /**
+     * getCustomerListByGymId
+     * @param ownerId
+     * @return
+     */
     public List<FlipFitCustomer> getCustomerListByGymId(int ownerId) {
         List<FlipFitCustomer> customerList = new ArrayList<>();
 
@@ -81,6 +90,12 @@ public class FlipFitGymOwnerDAOImpl implements FlipFitGymOwnerDAOInterface {
         return customerList;
     }
 
+    /**
+     * viewOwnCentresByOwnerID
+     * @param userId
+     * @return
+     */
+    @Override
     public List<FlipFitGymCentre> viewOwnCentres(int userId) {
         List<FlipFitGymCentre> gymcentres = new ArrayList<>();
         String sql = "SELECT gymId, gymName, ownerId, city, state, pincode FROM GymCentre where ownerId=?";
@@ -105,6 +120,12 @@ public class FlipFitGymOwnerDAOImpl implements FlipFitGymOwnerDAOInterface {
         return gymcentres;
     }
 
+    /**
+     * editDetails
+     * @param owner
+     * @return
+     */
+    @Override
     public FlipFitGymOwner editDetails(FlipFitGymOwner owner) {
         int userId = owner.getUserId();
         String sql = "UPDATE GymOwner SET panId=?, aadharNumber=? ,gstNumber=? WHERE userId=?";
@@ -126,6 +147,14 @@ public class FlipFitGymOwnerDAOImpl implements FlipFitGymOwnerDAOInterface {
         return null;
     }
 
+
+    /**
+     * addGymOwner
+     * @param owner
+     * @param user
+     * @return
+     */
+    @Override
     public FlipFitGymOwner addGymOwner(FlipFitGymOwner owner, FlipFitUser user) {
         String sql = "INSERT INTO GymOwner (userId ,panId, aadharNumber, gstNumber, isApproved) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -145,6 +174,12 @@ public class FlipFitGymOwnerDAOImpl implements FlipFitGymOwnerDAOInterface {
         return owner;
     }
 
+    /**
+     * deletegymOwner
+     * @param gymId
+     * @return
+     */
+    @Override
     public boolean deleteGymOwner(int gymId) { // Renamed parameter for clarity
         // SQL query to delete a gym owner record based on their userId
         String sql = "DELETE FROM GymCentre WHERE gymId = ?";

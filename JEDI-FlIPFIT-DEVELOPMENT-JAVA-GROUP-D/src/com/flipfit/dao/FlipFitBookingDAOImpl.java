@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FlipFitBookingDAOImpl implements FlipFitBookingDAOInterface{
+    /**
+     * makeBooking
+     * @param booking
+     * @return
+     */
     @Override
     public FlipFitBooking makeBooking(FlipFitBooking booking) {
         Connection conn = null;
@@ -137,6 +142,11 @@ public class FlipFitBookingDAOImpl implements FlipFitBookingDAOInterface{
     }
 
 
+    /**
+     * getAllBookings
+     * @param userId
+     * @return
+     */
     @Override
     public List<FlipFitBooking> getAllBookings(int userId){
         List<FlipFitBooking> bookings = new ArrayList<>(); // Initialize the list to an empty list
@@ -174,6 +184,11 @@ public class FlipFitBookingDAOImpl implements FlipFitBookingDAOInterface{
         return bookings;
     }
 
+    /**
+     * getBookingDetails
+     * @param bookingId
+     * @return
+     */
     @Override
     public FlipFitBooking getBookingDetailsByBookingId(int bookingId){
         FlipFitBooking bookings = new FlipFitBooking();

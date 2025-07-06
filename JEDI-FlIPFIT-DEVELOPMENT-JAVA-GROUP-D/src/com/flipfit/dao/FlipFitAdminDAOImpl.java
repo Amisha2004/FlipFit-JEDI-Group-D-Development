@@ -8,6 +8,10 @@ import java.util.List;
 
 public class FlipFitAdminDAOImpl implements FlipFitAdminDAOInterface {
 
+    /**
+     * getPendingOwnerList
+     * @return
+     */
     @Override
     public List<FlipFitGymOwner> getPendingGymOwnerList(){
         List<FlipFitGymOwner> pendingOwners = new ArrayList<>();
@@ -29,6 +33,10 @@ public class FlipFitAdminDAOImpl implements FlipFitAdminDAOInterface {
         return pendingOwners;
     }
 
+    /**
+     * getApprovedOwnerList
+     * @return
+     */
     @Override
     public List<FlipFitGymOwner> getApprovedGymOwnerList(){
         List<FlipFitGymOwner> approvedOwners = new ArrayList<>();
@@ -53,6 +61,10 @@ public class FlipFitAdminDAOImpl implements FlipFitAdminDAOInterface {
         return approvedOwners;
     }
 
+    /**
+     * getUserList
+     * @return
+     */
     @Override
     public List<FlipFitUser> getUserList(){
         List<FlipFitUser> users = new ArrayList<>();
@@ -74,6 +86,11 @@ public class FlipFitAdminDAOImpl implements FlipFitAdminDAOInterface {
         return users;
     }
 
+    /**
+     * validateOwner
+     * @param ownerId
+     * @return
+     */
     @Override
     public boolean validateOwner(int ownerId){
         String sql = "UPDATE GymOwner SET isApproved = 1 WHERE userId = ?";
@@ -89,6 +106,11 @@ public class FlipFitAdminDAOImpl implements FlipFitAdminDAOInterface {
         }
     }
 
+    /**
+     * deleteOwner
+     * @param ownerId
+     * @return
+     */
     @Override
     public boolean deleteOwner(int ownerId){
         String sql = "DELETE FROM User WHERE userId = ?";
@@ -103,6 +125,11 @@ public class FlipFitAdminDAOImpl implements FlipFitAdminDAOInterface {
         }
     }
 
+    /**
+     * getGymCentreUsingOwnerId
+     * @param ownerId
+     * @return
+     */
     @Override
     public List<FlipFitGymCentre> getGymCentreUsingOwnerId(int ownerId){
         List<FlipFitGymCentre> gymCentres = new ArrayList<>();

@@ -10,6 +10,13 @@ import java.util.Random;
 public class FlipFitUserDAOImpl implements FlipFitUserDAOInterface {
     Random rand = new Random();
 
+    /**
+     * login
+     * @param username
+     * @param password
+     * @param roleId
+     * @return FlipFitUser
+     */
     @Override
     public FlipFitUser login(String username, String password, int roleId) {
         String sql = "SELECT * from User where userName=? and password=? and roleId=?";
@@ -38,6 +45,13 @@ public class FlipFitUserDAOImpl implements FlipFitUserDAOInterface {
         return null;
     }
 
+
+    /**
+     * register
+     *
+     * @param FFU
+     * @return
+     */
     public FlipFitUser register(FlipFitUser FFU) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -89,6 +103,13 @@ public class FlipFitUserDAOImpl implements FlipFitUserDAOInterface {
         System.out.println("Deleting user");
     }
 
+
+    /**
+     * updateUser
+     *
+     * @param FFU
+     * @return
+     */
     public FlipFitUser updateUser(FlipFitUser FFU) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -121,6 +142,13 @@ public class FlipFitUserDAOImpl implements FlipFitUserDAOInterface {
         return null;
     }
 
+
+    /**
+     * getUser
+     *
+     * @param userId
+     * @return
+     */
     public FlipFitUser getUser(int userId){
         FlipFitUser FFU = new FlipFitUser();
 

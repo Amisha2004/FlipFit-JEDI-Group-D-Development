@@ -70,7 +70,10 @@ public class FlipFitMainApplicationMenu{
 								admin.setRole(role);
 								FlipFitAdminBusinessServices flipFitAdminBusinessServices = new FlipFitAdminBusinessServices();
 								FlipFitUser user = flipFitAdminBusinessServices.logIn(admin);
-								if (user != null) FlipFitAdminMenu.getFlipFitAdminMenu(user);
+								if (user != null) {
+									System.out.println(ColorConstants.GREEN + "Login Successful" + ColorConstants.RESET);
+									FlipFitAdminMenu.getFlipFitAdminMenu(user);
+								}
 								break;
 
 							}
@@ -81,7 +84,10 @@ public class FlipFitMainApplicationMenu{
 								gymOwner.setRole(role);
 								FlipFitGymOwnerBusinessServices flipFitGymOwnerBusinessServices = new FlipFitGymOwnerBusinessServices();
 								FlipFitUser user = flipFitGymOwnerBusinessServices.logIn(gymOwner);
-								if (user != null) FlipFitGymOwnerMenu.getFlipFitGymOwnerMenu(user);
+								if (user != null) {
+									System.out.println(ColorConstants.GREEN + "Login Successful" + ColorConstants.RESET);
+									FlipFitGymOwnerMenu.getFlipFitGymOwnerMenu(user);
+								}
 								break;
 							}
 							case 3: {
@@ -91,7 +97,10 @@ public class FlipFitMainApplicationMenu{
 								gymCustomer.setRole(role);
 								FlipFitCustomerBusinessServices flipFitCustomerBusinessServices = new FlipFitCustomerBusinessServices();
 								FlipFitUser user = flipFitCustomerBusinessServices.logIn(gymCustomer);
-								if (user != null) FlipFitCustomerMenu.getFlipFitCustomerMenu(user);
+								if (user != null) {
+									System.out.println(ColorConstants.GREEN + "Login Successful" + ColorConstants.RESET);
+									FlipFitCustomerMenu.getFlipFitCustomerMenu(user);
+								}
 								break;
 							}
 						}

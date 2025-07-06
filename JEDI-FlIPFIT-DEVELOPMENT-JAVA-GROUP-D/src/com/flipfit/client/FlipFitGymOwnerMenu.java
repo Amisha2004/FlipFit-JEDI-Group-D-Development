@@ -38,7 +38,7 @@ public class FlipFitGymOwnerMenu {
 			while(true){
 				System.out.println(ColorConstants.CYAN + "==========Gym Owner Menu==========" + ColorConstants.RESET);
 				// Print the date/time and admin name
-				System.out.println(ColorConstants.BLUE + String.format("%-30s %30s", formattedDateTime, gymOwner.getUserName()) + ColorConstants.RESET);
+				System.out.println(ColorConstants.BLUE + String.format("%-10s %10s", formattedDateTime, gymOwner.getUserName()) + ColorConstants.RESET);
 				System.out.println(ColorConstants.YELLOW + """
 						Choose your choice:
 						1 -> Add Gym Centre

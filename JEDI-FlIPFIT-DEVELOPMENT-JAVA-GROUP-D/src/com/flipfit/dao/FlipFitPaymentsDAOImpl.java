@@ -8,6 +8,12 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class FlipFitPaymentsDAOImpl implements FlipFitPaymentsDAOInterface {
+    /**
+     * setPaymentInfo
+     *
+     * @param flipFitPayments
+     */
+    @Override
     public void setPaymentInfo(FlipFitPayments flipFitPayments){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -32,6 +38,13 @@ public class FlipFitPaymentsDAOImpl implements FlipFitPaymentsDAOInterface {
             System.out.println(e.getMessage());
         }
     }
+
+    /**
+     * deletePaymentInfo
+     *
+     * @param FFP
+     */
+    @Override
     public void deletePaymentInfo(FlipFitPayments FFP) {
 
         try{

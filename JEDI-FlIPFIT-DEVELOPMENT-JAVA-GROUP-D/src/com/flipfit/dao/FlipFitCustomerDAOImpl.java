@@ -9,8 +9,8 @@ import java.sql.*;
 public class FlipFitCustomerDAOImpl implements FlipFitCustomerDAOInterface{
     /**
      * viewBookedSlots
-     * @param userID The ID of the user.
-     * @return A list of FlipFitBooking objects for the specified user.
+     * @param userID
+     * @return
      */
     public List<FlipFitSlots> viewBookedSlots(int userID) {
         List<FlipFitSlots> bookedSlots = new ArrayList<>();
@@ -34,8 +34,9 @@ public class FlipFitCustomerDAOImpl implements FlipFitCustomerDAOInterface{
 
     /**
      * checkBookingConflicts
-     * @param userId The ID of the user.
-     * @return A FlipFitBooking object
+     * @param userId
+     * @param slotTime
+     * @return
      */
     public FlipFitBooking checkBookingConflicts(int userId, Time slotTime) {
         String sql = "SELECT b.* FROM Booking b " +
@@ -76,8 +77,7 @@ public class FlipFitCustomerDAOImpl implements FlipFitCustomerDAOInterface{
 
     /**
      * viewCentres
-     * Retrieves a list of all gym centres.
-     * @return A list of FlipFitGymCentre objects.
+     * @return
      */
     public List<FlipFitGymCentre> viewGymCentres() {
         List<FlipFitGymCentre> gymcentres = new ArrayList<>();
@@ -104,19 +104,15 @@ public class FlipFitCustomerDAOImpl implements FlipFitCustomerDAOInterface{
 
     /**
      * makePayment
-     * @param userID The ID of the user.
-     * @return True
+     * @param userID
+     * @return
      */
     public boolean makePayment(int userID, String paymentInfo) {
         Connection conn = null;
         try {
             conn = GetConnection.getConnection();
-            // Start the transaction by disabling auto-commit
             conn.setAutoCommit(false);
 
-            // --- Query 1: Insert a new record into the Customer table ---
-            // WARNING: This assumes your Customer table allows multiple rows for the same userID.
-            // If userID is a PRIMARY KEY, this will fail on the second payment for the same user.
             String insertCustomerSql = "INSERT INTO GymCustomer (userId, paymentInfo) VALUES (?, ?)";
             try (PreparedStatement insertCustomerStmt = conn.prepareStatement(insertCustomerSql)) {
                 insertCustomerStmt.setInt(1, userID);
@@ -124,9 +120,6 @@ public class FlipFitCustomerDAOImpl implements FlipFitCustomerDAOInterface{
                 insertCustomerStmt.executeUpdate();
             }
 
-            // --- Query 2: Insert into the Payments table ---
-            // The 'paymentID' is not specified here because it is set to AUTO_INCREMENT
-            // in the database, which generates it automatically.
             String insertPaymentSql = "INSERT INTO Payments (userId, paymentInfo) VALUES (?, ?)";
             try (PreparedStatement insertPaymentStmt = conn.prepareStatement(insertPaymentSql)) {
                 insertPaymentStmt.setInt(1, userID);

@@ -9,6 +9,11 @@ import com.flipfit.exceptions.*;
 
 public class FlipFitSlotDAOImpl {
 
+    /**
+     * addSlot
+     * @param slot
+     * @return
+     */
     public FlipFitSlots addSlot(FlipFitSlots slot){
         String sql = "INSERT INTO Slots (gymId, slotTime, seatsAvailable, maxCapacity, slotDate) VALUES ( ?, ?, ?, ?, ?)";
         try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -40,6 +45,11 @@ public class FlipFitSlotDAOImpl {
         return slot;
     }
 
+    /**
+     * deleteSlot
+     * @param slot
+     * @return
+     */
     public boolean deleteSlot(FlipFitSlots slot){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -65,6 +75,11 @@ public class FlipFitSlotDAOImpl {
         return false;
     }
 
+    /**
+     * updateslot
+     * @param slot
+     * @return
+     */
     public boolean updateSlot(FlipFitSlots slot){
         String sql = "UPDATE Slots SET gymId = ?, slotTime = ?, seatsAvailable = ?, maxCapacity = ?, slotDate = ? WHERE slotId = ?";
         try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -86,7 +101,11 @@ public class FlipFitSlotDAOImpl {
         }
         return true;
     }
-
+    /**
+     * getAllSlots
+     * @param centreId
+     * @return
+     */
     public List<FlipFitSlots> getAllSlots(int centreId){
         List<FlipFitSlots> slots = new ArrayList<>();
 
@@ -122,6 +141,11 @@ public class FlipFitSlotDAOImpl {
         return slots;
     }
 
+    /**
+     * getSlotDetailsById
+     * @param slotId
+     * @return
+     */
     public FlipFitSlots getSlotById(int slotId){
         String sql = "SELECT * FROM Slots WHERE slotId=?";
         try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -150,6 +174,13 @@ public class FlipFitSlotDAOImpl {
         return null;
     }
 
+
+    /**
+     * getSlotDetails
+     * @param startTime
+     * @param centreId
+     * @return
+     */
     public FlipFitSlots getSlotDetails(Time startTime, int centreId){
         String sql = "SELECT * FROM Slots WHERE slotTime = ? AND gymId = ?";
         try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
