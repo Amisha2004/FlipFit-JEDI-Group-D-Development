@@ -148,7 +148,7 @@ public class FlipFitCustomerMenu {
 
 		// 5. Make Payment
 		System.out.println("\n--- Step 5: Processing Payment ---");
-		System.out.print("Enter your payment method (e.g., Credit Card, UPI): ");
+		System.out.print("Payment Amount:- 1000, Enter your payment method (e.g., Credit Card, UPI): ");
 		String paymentInfo = sc.nextLine();
 		boolean paymentSuccess = customerBusiness.makePayment(userId, paymentInfo);
 
